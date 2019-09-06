@@ -1,8 +1,8 @@
 clear;clc
 
 %MTE输入
-path = '/home/JiQiulei/NEE/GRA_Train_NEE_5.xlsx'; %输入文件绝对路径
-out_path = '/home/JiQiulei/NEE/JiQiulei20180928/result/'; %输出文件存放路径，包括训练数据、验证数据及模型
+path = 'D:\\OneDrive\\SharedFile\\MTE_NEE\\GRA_Train_NEE_5.xlsx'; %输入文件绝对路径
+out_path = 'C:\\Users\\thril\\Desktop\\MTEtest'; %输出文件存放路径，包括训练数据、验证数据及模型
 
 %读取分裂变量、回归变量、预测变量
 AllSplitX = xlsread(path, 'SplitX');
@@ -15,7 +15,7 @@ binCat = zeros(1,37);
 %AllRegressX = AllRegressX(1:200,:);
 %AllY = AllY(1:200,:);
 
-
+%一共有多少条数据
 Allnumber = size(AllSplitX, 1);
 indices = crossvalind('Kfold', Allnumber, 5);
 for i = 1:5
