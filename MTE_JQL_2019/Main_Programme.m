@@ -17,9 +17,12 @@ binCat = zeros(1,37);
 
 %一共有多少条数据
 Allnumber = size(AllSplitX, 1);
+%生成5份进行交叉验证，是一个分组矩阵
 indices = crossvalind('Kfold', Allnumber, 5);
 for i = 1:5
+    %拿出一份测试
     test = (indices == i);
+    %其他的训练的4份
     train = ~ test;
     TrainSplitX = AllSplitX(train, :);
     TrainRegressX = AllRegressX(train, :);

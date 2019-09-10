@@ -33,6 +33,7 @@ function mtbuild(SplitX, RegressX, Y, AllSplitX, AllRegressX, AllY, binCat, out_
     tic;
     
     MinNumCases = 90;
+    %MinCaseNumber：最后叶子节点剩余样本数，有关分裂停止的条件
     MinCaseNumber = 40;
     model.tree.caseInd = (1:1:length(SplitX))';
     model.tree.type ='LEAF';
