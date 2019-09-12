@@ -5,18 +5,17 @@
 close all;clear;clc
 
 yrs = [1998,2006];
-inpt='E:\OFFICE\MTE_NEE_DATA\1860年至2014年期间在农田和牧场中施用粪肥和氮肥\ManNitProCrpRd';
-outpt='E:\OFFICE\MTE_NEE_DATA\1860年至2014年期间在农田和牧场中施用粪肥和氮肥\ManNitProCrpRd_TIFF';
-fhead='yy';
+inpt='E:\OFFICE\MTE_NEE_DATA\1860 - 2016年期间，全球草地系统中的半度网状粪肥和肥料氮输入\manure_application';
+outpt='E:\OFFICE\MTE_NEE_DATA\1860 - 2016年期间，全球草地系统中的半度网状粪肥和肥料氮输入\manure_application_TIFF';
+fhead='ma';
 ftail='.txt';
 
 for yr=yrs(1):yrs(2)
-    H=importdata([inpt,'\',fhead,num2str(yr),ftail],' ');
-%     cellarry=struct2cell(H);
-    rasddata=H;
-%     rasddata=cell2mat(cellarry(1,1));
-%     rasinfocell=cellarry(2,1);
-%     rasinfo=rasinfocell{1};
+    H=importdata([inpt,'\',fhead,num2str(yr),ftail],' ',6);
+    cellarry=struct2cell(H);
+    rasddata=cell2mat(cellarry(1,1));
+    rasinfocell=cellarry(2,1);
+    rasinfo=rasinfocell{1};
 
     lats=[-88.5,88.5];
     lons=[-180,180];
