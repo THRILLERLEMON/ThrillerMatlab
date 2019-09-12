@@ -4,20 +4,26 @@
 % JiQiulei thrillerlemon@outlook.com
 close all;clear;clc
 
-H=importdata('C:\Users\thril\Desktop\test\manure_application\ma1860.txt',' ',6);
+yrs = [1998,2006];
+inpt='E:\OFFICE\MTE_NEE_DATA\1860 - 2016年期间，全球草地系统中的半度网状粪肥和肥料氮输入\manure_application';
+outpt='E:\OFFICE\MTE_NEE_DATA\1860 - 2016年期间，全球草地系统中的半度网状粪肥和肥料氮输入\manure_application_TIFF';
+fhead='ma';
+ftail='.txt';
 
-cellarry=struct2cell(H);
-rasddata=cell2mat(cellarry(1,1));
-rasinfocell=cellarry(2,1);
-rasinfo=rasinfocell{1};
+for yr=yrs(1):yrs(2)
+    H=importdata([inpt,'\',fhead,num2str(yr),ftail],' ',6);
+    cellarry=struct2cell(H);
+    rasddata=cell2mat(cellarry(1,1));
+    rasinfocell=cellarry(2,1);
+    rasinfo=rasinfocell{1};
 
-lats=[-88.5,88.5];
-lons=[-180,180];
-[ncols,nrows]=size(rasddata);
-outpt1='C:\Users\thril\Desktop\test\ma1860tiff.tif';
+    lats=[-88.5,88.5];
+    lons=[-180,180];
+    [nrows,ncols]=size(rasddata);
+    Rmat = makerefmat('RasterSize',[nrows,ncols],...
+        'Latlim',[lats(1) lats(2)], 'Lonlim',[lons(1) lons(2)],...
+        'ColumnsStartFrom','north');
+    geotiffwrite([outpt,'\',fhead,num2str(yr),'.tif'], rasddata,Rmat);
+end
 
-Rmat = makerefmat('RasterSize',[nrows,ncols],...
-    'Latlim',[lats(1) lats(2)], 'Lonlim',[lons(1) lons(2)]);
-    
-
-geotiffwrite(outpt1, rasddata,Rmat,'CoordRefSysCode', 4326);
+disp('Finish!')
