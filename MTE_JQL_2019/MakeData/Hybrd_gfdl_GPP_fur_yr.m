@@ -30,7 +30,7 @@ Rmat = makerefmat('RasterSize',[nrows,ncols],...
     'Latlim',[lats(1) lats(2)], 'Lonlim',[lons(1) lons(2)],...
     'ColumnsStartFrom','north');
 
-hds = ['hybrid_gfdl-esm2m_co2_gpp'];
+hds = 'hybrid_gfdl-esm2m_co2_gpp';
 for yr = yrs(1):yrs(2)
     ndys = 365;
     if mod(yr,400)==0||(mod(yr,4)==0 && mod(yr,100)~=0)
