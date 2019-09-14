@@ -9,18 +9,18 @@
 % 每一维每一次读取的步长)
 close all;clear;clc
 
-NCfur_pt = 'E:\\OFFICE\\MTE_NEE_DATA\\1961 - 2010年期间新的历史全球氮肥施用图\\FAOSTAT_ver1\\NH4_fraction_ver1.nc4';
-outpt = 'E:\\OFFICE\\MTE_NEE_DATA\\1961 - 2010年期间新的历史全球氮肥施用图\\FAOSTAT_ver1\\NH4_fraction_TIFF';
+NC_pt = 'E:\OFFICE\MTE_NEE_DATA\Backup\N沉降\mstmip_driver_global_hd_nitrogen_noy_v1.nc4';
+outpt = 'E:\OFFICE\MTE_NEE_DATA\NOy_N_Deposition1982_2011';
 %NC数据的起始年
-NCy = 1961;
+NCy = 1860;
 %要使用的NC数据的变量名称
-vstr = 'NH4_frac';
+vstr = 'NOy';
 
 nrows = 360;
 ncols = 720;
 lats = [-90,90];
 lons = [-180,180];
-yrs = [1998,2006];
+yrs = [1982,2011];
 bv = -9999;
 
 
@@ -30,9 +30,9 @@ Rmat = makerefmat('RasterSize',[nrows,ncols],...
     'Latlim',[lats(1) lats(2)], 'Lonlim',[lons(1) lons(2)],...
     'ColumnsStartFrom','north');
 
-hds = 'NH4_frac';
+hds = 'NOy_N_Deposition';
 for yr = yrs(1):yrs(2)
-    tmp = double(ncread(NCfur_pt,vstr,...
+    tmp = double(ncread(NC_pt,vstr,...
         [1 1 yr-NCy+1],[ncols nrows 1],[1 1 1]));
     tmp(tmp==tmp(1,1)) = nan;
     tmp(isnan(tmp)) = -9999;
