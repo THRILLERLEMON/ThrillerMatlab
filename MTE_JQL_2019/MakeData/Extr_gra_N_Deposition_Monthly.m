@@ -5,9 +5,9 @@
 clear;close all;clc
 
 %%  input
-MTE_MA_pt = 'E:\OFFICE\MTE_NEE_DATA\Manure_Application1982_2011';
+MTE_pt = 'E:\OFFICE\MTE_NEE_DATA\NOy_N_Deposition1982_2011';
 %文件头
-hdm = 'ma';
+hdm = 'NOy_N_Deposition_';
 %文件尾
 ftm = '.tif';
 %年的范围
@@ -28,8 +28,8 @@ rst = nan((yrs(2)-yrs(1)+1)*(mns(2)-mns(1)+1),length(lats));
 %月份的计数器
 mct = 1;
 for yr = yrs(1):yrs(2)
-    VARm = double(imread([MTE_MA_pt,'\',hdm,num2str(yr),ftm]));
-    VARm(VARm==VARm(1,1)) = nan;
+    VARm = double(imread([MTE_pt,'\',hdm,num2str(yr),ftm]));
+    VARm(VARm==-9999) = nan;
     for mn = mns(1):mns(2)
         for ist = 1:length(lats)
             rst(mct,ist) = VARm(ceil((90-lats(ist))/rsize),...
@@ -42,7 +42,7 @@ end
 
 ym = [kron((yrs(1):yrs(2))',ones(mns(2)-mns(1)+1,1)),...
     repmat((mns(1):mns(2))',yrs(2)-yrs(1)+1,1)];
-dlmwrite([outpt,'\Manure_Application_SiteMonthly.txt'],...
+dlmwrite([outpt,'\NOy_N_Deposition_SiteMonthly.txt'],...
     [ym,rst])
 
 disp('Finish!')
