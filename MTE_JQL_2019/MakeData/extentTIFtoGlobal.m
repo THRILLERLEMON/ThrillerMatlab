@@ -22,7 +22,8 @@ rasdata=[addrowUP;VARm;addrowDOWN];
 Rmat = makerefmat('RasterSize',[21600,43200],...
     'Latlim',[-90 90], 'Lonlim',[-180 180],...
     'ColumnsStartFrom','north');
-geotiffwrite('E:\OFFICE\MTE_NEE_DATA\GSOC\GSOCmap1.5.0_Extend.tif', rasdata,Rmat);
+% geotiffwrite('E:\OFFICE\MTE_NEE_DATA\GSOC\GSOCmap1.5.0_Extend.tif', rasdata,Rmat);
+save('E:\OFFICE\MTE_NEE_DATA\GSOC\GSOCmap_Extend.mat', 'rasdata','-v7.3')
 [nrows,ncols]=size(rasdata);
 disp(nrows)
 disp(ncols)
