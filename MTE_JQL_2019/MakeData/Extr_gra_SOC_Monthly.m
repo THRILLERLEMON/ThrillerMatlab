@@ -13,7 +13,7 @@ rsize=1/12;
 gra_st_fl = 'E:\OFFICE\MTE_NEE_DATA\Gra_LatLon.txt';
 outpt = 'E:\OFFICE\MTE_NEE_DATA\GraSitData';
 
-VARm = double(imread('E:\OFFICE\MTE_NEE_DATA\GSOC\GSOCmap1.5.0_Extend10KM_bil.tif'));
+VARm = double(imread('E:\OFFICE\MTE_NEE_DATA\DEM_Data\vbf_MERIT_10km.tif'));
 VARm(VARm==VARm(1,1)) = nan;
 
 %%  operate
@@ -37,7 +37,7 @@ end
 
 ym = [kron((yrs(1):yrs(2))',ones(mns(2)-mns(1)+1,1)),...
     repmat((mns(1):mns(2))',yrs(2)-yrs(1)+1,1)];
-dlmwrite([outpt,'\GSOC_SiteMonthly.txt'],...
+dlmwrite([outpt,'\vbf_SiteMonthly.txt'],...
     [ym,rst])
 
 disp('Finish!')
