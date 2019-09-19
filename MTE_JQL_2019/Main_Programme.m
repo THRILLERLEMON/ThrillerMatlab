@@ -1,15 +1,20 @@
+% 6th Train by JiQiulei
+% Linux
+% 2019.9.19
+% JiQiulei thrillerlemon@outlook.com
 clear;clc
 
 %MTE输入
-path = 'D:\\OneDrive\\SharedFile\\MTE_NEE\\GRA_Train_NEE_5.xlsx'; %输入文件绝对路径
-out_path = 'C:\\Users\\thril\\Desktop\\MTEtest'; %输出文件存放路径，包括训练数据、验证数据及模型
+path = '/home/JiQiulei/MTE_JQL_2019/GRA_Train_NEE_6.xlsx'; %输入文件绝对路径
+out_path = '/home/JiQiulei/MTE_JQL_2019/MTE_RunRes/'; %输出文件存放路径，包括训练数据、验证数据及模型
 
 %读取分裂变量、回归变量、预测变量
 AllSplitX = xlsread(path, 'SplitX');
 AllRegressX = xlsread(path, 'RegressX');
 AllY = xlsread(path, 'Y');
 %binCat = xlsread(path, 'binCat');
-binCat = zeros(1,37);
+%46个变量都是连续变量
+binCat = zeros(1,46);
 
 %AllSplitX = AllSplitX(1:200,:);
 %AllRegressX = AllRegressX(1:200,:);

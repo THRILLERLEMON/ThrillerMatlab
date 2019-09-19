@@ -1,18 +1,18 @@
-function mtEnsemble(mtree, SplitX, RegressX, Y, AllSplitX, AllRegressX, AllY, binCat, MinNumCases, MinCaseNumber, treeNumber, ensembleNumber)
+function mtEnsemble(mtree, SplitX, RegressX, Y, AllSplitX, AllRegressX, AllY, binCat, outPath, MinNumCases, MinCaseNumber, treeNumber, ensembleNumber)
     % set(0,'RecursionLimit,10000000000');
-    if  nargin < 9 || isempty(MinNumCases)
+    if  nargin < 10 || isempty(MinNumCases)
         MinNumCases = 90;
     end
     
-    if nargin < 10 || isempty(MinCaseNumber)
+    if nargin < 11 || isempty(MinCaseNumber)
         MinCaseNumber = 40;
     end
     
-    if nargin < 11 || isempty(treeNumber)
+    if nargin < 12 || isempty(treeNumber)
         treeNumber = 200;
     end
     
-    if nargin < 12 || isempty(ensembleNumber)
+    if nargin < 13 || isempty(ensembleNumber)
         ensembleNumber = 25;
     end
     
@@ -50,7 +50,7 @@ function mtEnsemble(mtree, SplitX, RegressX, Y, AllSplitX, AllRegressX, AllY, bi
         mm = mm+1;
         mtreeF1 = [];
         %保存路径，需修改
-        save('/root/NEE_Train/new_2016_11.6/NEE_Train_2016_12_27/forest/F1/Forest1.mat','forest');
+        save([outPath,'Forest1.mat'],'forest');
     end
     
     tmpbic = NaN(treeNumber/10,10);
@@ -67,7 +67,7 @@ function mtEnsemble(mtree, SplitX, RegressX, Y, AllSplitX, AllRegressX, AllY, bi
     end
     
     toc;
-    save('/root/NEE_Train/new_2016_11.6/NEE_Train_2016_12_27/forest/F1/MTE1.mat','ensemble');
+    save([outPath,'ensemble1.mat'],'ensemble');
     fprintf('Have fun, Model Tree Ensemble have done...');
     
     end

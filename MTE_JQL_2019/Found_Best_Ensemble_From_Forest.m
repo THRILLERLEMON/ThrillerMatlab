@@ -6,11 +6,11 @@ function R2 = Found_Best_Ensemble_From_Forest(SplitX, RegressX,Y,SplitTestX,Regr
         PredictTrainY = mtepredict(ensemble, SplitX, RegressX, binCat);
         PredictTestY = mtepredict(ensemble, SplitTestX,RegressTestX,binCat);
         PredictAllY = mtepredict(ensemble, AllSplitX, AllRegressX, binCat);
-        [~,stats1] = test(PredictTrainY, Y, 2);
+        [~,stats1] = test(PredictTrainY, Y, 1);
         R2(2, i-9) = stats1(1);
-        [~, stats2] = test(PredictTestY, TestY, 2);
+        [~, stats2] = test(PredictTestY, TestY, 1);
         R2(3, i-9) = stats2(1);
-        [~,stats3] = test(PredictAllY, AllY, 2);
+        [~,stats3] = test(PredictAllY, AllY, 1);
         R2(4, i-9) = stats3(1);
         
         eststr = ['Completed :', num2str(i*100/91), '%'];
