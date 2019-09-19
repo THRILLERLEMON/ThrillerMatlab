@@ -5,9 +5,9 @@
 clear;close all;clc
 
 %%  input
-MTE_pt = 'E:\OFFICE\MTE_NEE_DATA\NOy_N_Deposition1982_2011';
+MTE_pt = 'E:\OFFICE\MTE_NEE_DATA\N_Deposition1982_2011';
 %文件头
-hdm = 'NOy_N_Deposition_';
+hdm = 'N_Deposition_';
 %文件尾
 ftm = '.tif';
 %年的范围
@@ -42,7 +42,7 @@ end
 
 ym = [kron((yrs(1):yrs(2))',ones(mns(2)-mns(1)+1,1)),...
     repmat((mns(1):mns(2))',yrs(2)-yrs(1)+1,1)];
-dlmwrite([outpt,'\NOy_N_Deposition_SiteMonthly.txt'],...
+dlmwrite([outpt,'\N_Deposition_SiteMonthly.txt'],...
     [ym,rst])
 
 disp('Finish!')
