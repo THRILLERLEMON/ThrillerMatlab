@@ -1,0 +1,14 @@
+#PBS -N matlab_job_Parfor
+#PBS -l walltime=1000:00:00
+#PBS -l nodes=4:ppn=10
+#PBS -q cpu
+#PBS -o qjobParfor_out.txt
+#PBS -e qjobParfor_err.txt 
+
+cd /home/JiQiulei/MTE_JQL_2019_parfor
+/opt/matlab/MATLAB/R2014b/bin/matlab -nodisplay -nodesktop -r "Parfor_Run5MT_1" 1>matlabRunMT1.log 2>matlabRunMT1.err
+/opt/matlab/MATLAB/R2014b/bin/matlab -nodisplay -nodesktop -r "Parfor_Run5MT_2" 1>matlabRunMT2.log 2>matlabRunMT2.err
+/opt/matlab/MATLAB/R2014b/bin/matlab -nodisplay -nodesktop -r "Parfor_Run5MT_3" 1>matlabRunMT3.log 2>matlabRunMT3.err
+/opt/matlab/MATLAB/R2014b/bin/matlab -nodisplay -nodesktop -r "Parfor_Run5MT_4" 1>matlabRunMT4.log 2>matlabRunMT4.err
+/opt/matlab/MATLAB/R2014b/bin/matlab -nodisplay -nodesktop -r "Parfor_Run5MT_5" 1>matlabRunMT5.log 2>matlabRunMT5.err
+# end of example file
