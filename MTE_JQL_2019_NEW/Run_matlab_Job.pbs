@@ -1,0 +1,10 @@
+#PBS -N matlab_job
+#PBS -l walltime=1000:00:00
+#PBS -l nodes=4:ppn=10
+#PBS -q cpu
+#PBS -o qjob_out.txt
+#PBS -e qjob_err.txt 
+
+cd /home/JiQiulei/MTE_JQL_2019
+/opt/matlab/MATLAB/R2014b/bin/matlab -nodisplay -nodesktop -r "AllDataTrainAMT" 1>RunADTMT.log 2>RunADTMT.err
+# end of example file
