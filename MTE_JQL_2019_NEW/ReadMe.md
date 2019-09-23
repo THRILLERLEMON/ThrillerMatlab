@@ -26,11 +26,12 @@
 
 **脚本介绍**
 脚本名称|作用|输入|直接输出|输出文件名称格式
--|:-:|:-:|:-:|-
-**Main_Programme**|构建一颗模型树|训练数据（xlsx）|每次的交叉验证的变量|Test_*N*(N为第几次交叉验证)
-mtbuild|构建模型树|拆分后的训练数据|一次验证的模型树（mat）|MT*N*(N为第几次交叉验证)
-**TestEveryMT**|使用单个树计算预测值|模型树和训练数据|每一颗模型树的预测值|数据和R2
-MTpredict|使用单个树计算预测值|模型树和训练数据|一颗模型树的预测值|matlab变量
+:-:|:-:|:-:|:-:|:-:
+**AllDataTrainAMT**|构建一颗模型树|全部训练数据（xlsx）|训练脚本中的变量和模型树|Training_EnvVar.mat;MTAllTrain.mat
+**CrossValind**|交叉验证|训练数据|5次交叉验证的模型树|验证的变量和验证生成的模型树
+mtbuild|构建模型树|训练数据|模型树（mat）|MT*N*(N为第几次交叉验证)
+**TestEveryMT**|验证模型树|模型树和测试训练数据|每一颗模型树的预测值和真值|TestEveryMT_*N*.mat(N为第几次交叉验证)
+MTpredict|使用单个树计算预测值|模型树和解释变量数据|一颗模型树的预测值|matlab变量
 **MakeForestGetMTE**|生成森林并生成模型树组合信息|模型树和训练数据|森林和组合信息|Forest1.mat和MTE_R2Info.mat
 mtEnsemble|生成森林和树组合|模型树和其他训练数据|森林（mat）和组合（mat）|Forest1.mat和MTE1.mat
 Found_Best_Ensemble_From_Forest|在森林中寻找最优组合|森林和其他数据|返回MTE预测值和真值的对比矩阵|matlab变量
@@ -39,15 +40,15 @@ mtepredict|根据模型树组合输出预测值|模型树组合和解释变量|�
 **OutputBestMTE**|输出最优MTE|根据森林和最优组合树数|输出MTE|MTEbest.mat
 
 **运行日志**
-*第一次运行-2019年9月19日*
+*第一次运行-2019年9月21日*
 1、运行平台
 >Linux
 
 2、执行内容
->进行5次交叉验证生成对应的5个模型树
+>使用所有的数据进行训练，生成一个模型树
 
 3、使用脚本
->Main_Programme.m; mtbuild.m
+>AllDataTrainAMT.m; mtbuild.m
 
 4、运行目录
 >/home/JiQiulei/MTE_JQL_2019
@@ -60,7 +61,61 @@ mtepredict|根据模型树组合输出预测值|模型树组合和解释变量|�
  #PBS -o qjob_out.txt
  #PBS -e qjob_err.txt 
  cd /home/JiQiulei/MTE_JQL_2019
- /opt/matlab/MATLAB/R2014b/bin/matlab -nodisplay -nodesktop -r "Main_Programme" 1>matlabRun.log 2>matlabRun.err
+ /opt/matlab/MATLAB/R2014b/bin/matlab -nodisplay -nodesktop -r "AllDataTrainAMT" 1>RunADTMT.log 2>RunADTMT.err
 
 6、运行结果
+>在/home/JiQiulei/MTE_JQL_2019/MTE_RunRes路径中生成Training_EnvVar.mat和MTAllTrain.mat
+
+
+*第二次运行-2019年9月23日*
+1、运行平台
+>Linux
+
+2、执行内容
+>进行交叉验证模型树的生成，5棵
+
+3、使用脚本
+>CrossValind1.m;CrossValind2.m;CrossValind3.m;CrossValind4.m;CrossValind5.m; 
+ mtbuild.m
+
+4、运行目录
+>/home/JiQiulei/MTE_JQL_2019
+
+5、运行命令
+>nohup /opt/matlab/MATLAB/R2014b/bin/matlab -nodisplay -nodesktop < CrossValind1.m 1>RunCV1.log 2>RunCV1.err &
+>nohup /opt/matlab/MATLAB/R2014b/bin/matlab -nodisplay -nodesktop < CrossValind2.m 1>RunCV2.log 2>RunCV2.err &
+>nohup /opt/matlab/MATLAB/R2014b/bin/matlab -nodisplay -nodesktop < CrossValind3.m 1>RunCV3.log 2>RunCV3.err &
+>nohup /opt/matlab/MATLAB/R2014b/bin/matlab -nodisplay -nodesktop < CrossValind4.m 1>RunCV4.log 2>RunCV4.err &
+>nohup /opt/matlab/MATLAB/R2014b/bin/matlab -nodisplay -nodesktop < CrossValind5.m 1>RunCV5.log 2>RunCV5.err &
+
+6、运行结果
+>在/home/JiQiulei/MTE_JQL_2019/MTE_RunRes路径中生成
+ CorssValindVar_1.mat;MTCorssValind1.mat;
+ CorssValindVar_2.mat;MTCorssValind2.mat;
+ CorssValindVar_3.mat;MTCorssValind3.mat;
+ CorssValindVar_4.mat;MTCorssValind4.mat;
+ CorssValindVar_5.mat;MTCorssValind5.mat;
+
+*第三次运行-2019年9月23日*
+1、运行平台
+>Linux
+
+2、执行内容
+>使用全部数据生成的模型树进行森林生成和寻找MTE
+
+3、使用脚本
+>MakeForestGetMTE.m
+ Found_Best_Ensemble_From_Forest.m
+ mtEnsemble.m
+ TF.m
+ mtepredict.m
+ test.m
+4、运行目录
+>/home/JiQiulei/MTE_JQL_2019
+
+5、运行命令
+>nohup /opt/matlab/MATLAB/R2014b/bin/matlab -nodisplay -nodesktop < MakeForestGetMTE.m 1>RunMFGE.log 2>RunMFGE.err &
+
+6、运行结果
+>在/home/JiQiulei/MTE_JQL_2019/MTE_RunRes
 

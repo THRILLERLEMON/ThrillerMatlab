@@ -21,9 +21,9 @@ function mtEnsemble(mtree, SplitX, RegressX, Y, AllSplitX, AllRegressX, AllY, bi
     %
     forest{1} = mtree;
     
-    global mtreeF1
-    global mtreeTest
-    global panduannnn
+    global mtreeF1;
+    global mtreeTest;
+    global panduannnn;
     
     mtreeTest = [];
     panduannnn = [];
@@ -50,7 +50,7 @@ function mtEnsemble(mtree, SplitX, RegressX, Y, AllSplitX, AllRegressX, AllY, bi
         mm = mm+1;
         mtreeF1 = [];
         %保存路径，需修改
-        save([outPath,'Forest1.mat'],'forest');
+        save([outPath,'Forest.mat'],'forest');
     end
     
     tmpbic = NaN(treeNumber/10,10);
@@ -67,7 +67,7 @@ function mtEnsemble(mtree, SplitX, RegressX, Y, AllSplitX, AllRegressX, AllY, bi
     end
     
     toc;
-    save([outPath,'ensemble1.mat'],'ensemble');
+    save([outPath,'ensemble_',num2str(ensembleNumber),'.mat'],'ensemble');
     fprintf('Have fun, Model Tree Ensemble have done...');
     
     end
@@ -140,7 +140,7 @@ function mtEnsemble(mtree, SplitX, RegressX, Y, AllSplitX, AllRegressX, AllY, bi
     %标记所有内部节点
     function number = SignInteriorNode(code, number)
     %随机选出一个内部节点
-    global mtreeF1
+    global mtreeF1;
     code = num2str(code);
     a = 'mtreeF1';
     b = '.left';
@@ -360,8 +360,8 @@ function mtEnsemble(mtree, SplitX, RegressX, Y, AllSplitX, AllRegressX, AllY, bi
     
     %判断最后分裂的节点中是否有random的
     function m = panduan(code, m)
-    global mtreeF1
-    global panduannnn
+    global mtreeF1;
+    global panduannnn;
     code = num2str(code);
     a = 'mtreeF1';
     b = '.left';
