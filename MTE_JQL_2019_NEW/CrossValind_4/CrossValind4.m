@@ -29,11 +29,10 @@ for n =1:5
     TrainY=[TrainY;xlsread([path,'MTE_CorssValind',num2str(n),'.xlsx'], 'Y')];
 end
 
-%一共有多少条数据
-Allnumber = size(AllSplitX, 1);
 AllSplitX=[TestSplitX;TrainSplitX];
 AllRegressX=[TestRegressX;TrainRegressX];
 AllY=[TestY;TrainY];
+Allnumber = size(AllSplitX, 1);
 
 %46个变量都是连续变量
 binCat = zeros(1,46);

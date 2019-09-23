@@ -1,16 +1,17 @@
-% test every MT to choose a best MT 
+% test every MT
 % Linux
-% 2019.9.20
+% 2019.9.23
 % JiQiulei thrillerlemon@outlook.com
 clear;clc
+
 % load
 data_b = NaN(1, 5);
 data_R2 = NaN(1, 5);
 for i = 1:5
-    %Test Every MT
+    %Test ALLtrainMT
     mtrespath = '/home/JiQiulei/MTE_JQL_2019/MTE_RunRes/';
-    load([mtrespath, 'MT', num2str(i),'.mat']);
-    load([mtrespath, 'Test_', num2str(i), '.mat']);
+    load([mtrespath, 'MTCorssValind',num2str(i),'.mat']);
+    load([mtrespath, 'CorssValindVar_', num2str(i), '.mat']);
     PredictTestY = MTpredict(mtree, TestSplitX, TestRegressX, binCat);
     Y2 = [ones(length(PredictTestY),1),PredictTestY];
     [b, ~, ~, ~,stats] = regress(TestY, Y2, 0.01);
