@@ -23,6 +23,6 @@ for i = 1:5
     disp(outresult);
     eatstr = ['Completed :', num2str(i*100/5), '%'];
     disp(eatstr);
-    save([mtrespath, 'TestEveryMT_',num2str(i)]);
 end
+save([out_path, 'TestEveryMT_Var']);
 disp('OK')

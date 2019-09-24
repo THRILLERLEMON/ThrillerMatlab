@@ -96,26 +96,97 @@ mtepredict|根据模型树组合输出预测值|模型树组合和解释变量|�
  CorssValindVar_4.mat;MTCorssValind4.mat;
  CorssValindVar_5.mat;MTCorssValind5.mat;
 
-*第三次运行-2019年9月23日*
+*第三次运行-2019年9月24日*
 1、运行平台
 >Linux
 
 2、执行内容
->使用全部数据生成的模型树进行森林生成和寻找MTE
+>验证交叉验证生成的5棵模型树
 
 3、使用脚本
->MakeForestGetMTE.m
- Found_Best_Ensemble_From_Forest.m
- mtEnsemble.m
- TF.m
- mtepredict.m
- test.m
+>TestEveryMT.m
+ MTpredict.m
 4、运行目录
 >/home/JiQiulei/MTE_JQL_2019
 
 5、运行命令
->nohup /opt/matlab/MATLAB/R2014b/bin/matlab -nodisplay -nodesktop < MakeForestGetMTE.m 1>RunMFGE.log 2>RunMFGE.err &
+>nohup /opt/matlab/MATLAB/R2014b/bin/matlab -nodisplay -nodesktop < TestEveryMT.m 1>RunTMT.log 2>RunTMT.err &
 
 6、运行结果
->在/home/JiQiulei/MTE_JQL_2019/MTE_RunRes
+>在/home/JiQiulei/MTE_JQL_2019/MTE_RunRes路径中生成
+ TestEveryMT_1.mat
+ TestEveryMT_2.mat
+ TestEveryMT_3.mat
+ TestEveryMT_4.mat
+ TestEveryMT_5.mat
+ 在/home/JiQiulei/MTE_JQL_2019生成
+ RunTMT.log
+
+*第四次运行-2019年9月24日*
+1、运行平台
+>Linux
+
+2、执行内容
+>进行随机分成5份的交叉验证
+
+3、使用脚本
+>Parfor_Make5RandomCrossValind.m
+ Parfor_Run5MT_1.m
+ Parfor_Run5MT_2.m
+ Parfor_Run5MT_3.m
+ Parfor_Run5MT_4.m
+ Parfor_Run5MT_5.m
+ mtbuild.m
+ 
+4、运行目录
+>/home/JiQiulei/MTE_JQL_2019
+
+5、运行命令
+>nohup /opt/matlab/MATLAB/R2014b/bin/matlab -nodisplay -nodesktop < Parfor_Make5RandomCrossValind.m 1>RunRCVF.log 2>RunRCVF.err &
+ nohup /opt/matlab/MATLAB/R2014b/bin/matlab -nodisplay -nodesktop < Parfor_Run5MT_1.m 1>RunRCV1.log 2>RunRCV1.err &
+ nohup /opt/matlab/MATLAB/R2014b/bin/matlab -nodisplay -nodesktop < Parfor_Run5MT_2.m 1>RunRCV2.log 2>RunRCV2.err &
+ nohup /opt/matlab/MATLAB/R2014b/bin/matlab -nodisplay -nodesktop < Parfor_Run5MT_3.m 1>RunRCV3.log 2>RunRCV3.err &
+ nohup /opt/matlab/MATLAB/R2014b/bin/matlab -nodisplay -nodesktop < Parfor_Run5MT_4.m 1>RunRCV4.log 2>RunRCV4.err &
+ nohup /opt/matlab/MATLAB/R2014b/bin/matlab -nodisplay -nodesktop < Parfor_Run5MT_5.m 1>RunRCV5.log 2>RunRCV5.err &
+
+6、运行结果
+>在/home/JiQiulei/MTE_JQL_2019/MTE_RunRes路径中生成
+
+*第五次运行-2019年9月24日*
+1、运行平台
+>Linux
+
+2、执行内容
+>分10次，每次生成100棵树
+
+3、使用脚本
+>MakeForest1.m
+ MakeForest2.m
+ MakeForest3.m
+ MakeForest4.m
+ MakeForest5.m
+ MakeForest6.m
+ MakeForest7.m
+ MakeForest8.m
+ MakeForest9.m
+ MakeForest10.m
+ mtEnsemble.m（10个）
+ 
+4、运行目录
+>/home/JiQiulei/MTE_JQL_2019
+
+5、运行命令
+>nohup /opt/matlab/MATLAB/R2014b/bin/matlab -nodisplay -nodesktop < MakeForest1.m 1>RunMF1.log 2>RunMF1.err &
+ nohup /opt/matlab/MATLAB/R2014b/bin/matlab -nodisplay -nodesktop < MakeForest2.m 1>RunMF2.log 2>RunMF2.err &
+ nohup /opt/matlab/MATLAB/R2014b/bin/matlab -nodisplay -nodesktop < MakeForest3.m 1>RunMF3.log 2>RunMF3.err &
+ nohup /opt/matlab/MATLAB/R2014b/bin/matlab -nodisplay -nodesktop < MakeForest4.m 1>RunMF4.log 2>RunMF4.err &
+ nohup /opt/matlab/MATLAB/R2014b/bin/matlab -nodisplay -nodesktop < MakeForest5.m 1>RunMF5.log 2>RunMF5.err &
+ nohup /opt/matlab/MATLAB/R2014b/bin/matlab -nodisplay -nodesktop < MakeForest6.m 1>RunMF6.log 2>RunMF6.err &
+ nohup /opt/matlab/MATLAB/R2014b/bin/matlab -nodisplay -nodesktop < MakeForest7.m 1>RunMF7.log 2>RunMF7.err &
+ nohup /opt/matlab/MATLAB/R2014b/bin/matlab -nodisplay -nodesktop < MakeForest8.m 1>RunMF8.log 2>RunMF8.err &
+ nohup /opt/matlab/MATLAB/R2014b/bin/matlab -nodisplay -nodesktop < MakeForest9.m 1>RunMF9.log 2>RunMF9.err &
+ nohup /opt/matlab/MATLAB/R2014b/bin/matlab -nodisplay -nodesktop < MakeForest10.m 1>RunMF10.log 2>RunMF10.err &
+ 
+6、运行结果
+>在/home/JiQiulei/MTE_JQL_2019/MTE_RunRes路径中生成
 
