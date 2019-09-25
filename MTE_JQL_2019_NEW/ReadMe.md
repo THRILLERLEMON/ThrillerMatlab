@@ -98,7 +98,7 @@ mtepredict|根据模型树组合输出预测值|模型树组合和解释变量|�
 
 *第三次运行-2019年9月24日*
 1、运行平台
->Linux
+>Windows
 
 2、执行内容
 >验证交叉验证生成的5棵模型树
@@ -107,20 +107,13 @@ mtepredict|根据模型树组合输出预测值|模型树组合和解释变量|�
 >TestEveryMT.m
  MTpredict.m
 4、运行目录
->/home/JiQiulei/MTE_JQL_2019
+>Windows
 
 5、运行命令
->nohup /opt/matlab/MATLAB/R2014b/bin/matlab -nodisplay -nodesktop < TestEveryMT.m 1>RunTMT.log 2>RunTMT.err &
+>Windows Matlab
 
 6、运行结果
->在/home/JiQiulei/MTE_JQL_2019/MTE_RunRes路径中生成
- TestEveryMT_1.mat
- TestEveryMT_2.mat
- TestEveryMT_3.mat
- TestEveryMT_4.mat
- TestEveryMT_5.mat
- 在/home/JiQiulei/MTE_JQL_2019生成
- RunTMT.log
+>存储在运行结果文件夹
 
 *第四次运行-2019年9月24日*
 1、运行平台
@@ -153,6 +146,25 @@ mtepredict|根据模型树组合输出预测值|模型树组合和解释变量|�
 >在/home/JiQiulei/MTE_JQL_2019/MTE_RunRes路径中生成
 
 *第五次运行-2019年9月24日*
+1、运行平台
+>Windows
+
+2、执行内容
+>验证随机交叉验证生成的5棵模型树
+
+3、使用脚本
+>TestEveryRondomMT.m
+ MTpredict.m
+4、运行目录
+>Windows
+
+5、运行命令
+>Windows Matlab
+
+6、运行结果
+>存储在运行结果文件夹
+
+*第六次运行-2019年9月24日*
 1、运行平台
 >Linux
 
@@ -189,4 +201,5 @@ mtepredict|根据模型树组合输出预测值|模型树组合和解释变量|�
  
 6、运行结果
 >在/home/JiQiulei/MTE_JQL_2019/MTE_RunRes路径中生成
+
 
