@@ -164,7 +164,36 @@ mtepredict|根据模型树组合输出预测值|模型树组合和解释变量|�
 6、运行结果
 >存储在运行结果文件夹
 
-*第六次运行-2019年9月24日*
+*第六次运行-2019年9月26日*
+1、运行平台
+>Linux
+
+2、执行内容
+>进行随机分成5份的交叉验证(无草地管理强度变量【Intensive_frac】)
+
+3、使用脚本
+>NoIF_Run5MT_1.m
+ NoIF_Run5MT_2.m
+ NoIF_Run5MT_3.m
+ NoIF_Run5MT_4.m
+ NoIF_Run5MT_5.m
+ mtbuild.m
+ 
+4、运行目录
+>/home/JiQiulei/MTE_JQL_2019
+
+5、运行命令
+>nohup /opt/matlab/MATLAB/R2014b/bin/matlab -nodisplay -nodesktop < NoIF_Run5MT_1.m 1>RunNRCV1.log 2>RunNRCV1.err &
+ nohup /opt/matlab/MATLAB/R2014b/bin/matlab -nodisplay -nodesktop < NoIF_Run5MT_2.m 1>RunNRCV2.log 2>RunNRCV2.err &
+ nohup /opt/matlab/MATLAB/R2014b/bin/matlab -nodisplay -nodesktop < NoIF_Run5MT_3.m 1>RunNRCV3.log 2>RunNRCV3.err &
+ nohup /opt/matlab/MATLAB/R2014b/bin/matlab -nodisplay -nodesktop < NoIF_Run5MT_4.m 1>RunNRCV4.log 2>RunNRCV4.err &
+ nohup /opt/matlab/MATLAB/R2014b/bin/matlab -nodisplay -nodesktop < NoIF_Run5MT_5.m 1>RunNRCV5.log 2>RunNRCV5.err &
+
+6、运行结果
+>在/home/JiQiulei/MTE_JQL_2019/MTE_RunRes路径中生成
+
+
+*第七次运行-2019年9月24日*
 1、运行平台
 >Linux
 
