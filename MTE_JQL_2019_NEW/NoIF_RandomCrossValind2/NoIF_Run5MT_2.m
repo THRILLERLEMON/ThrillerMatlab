@@ -3,7 +3,7 @@
 % 2019.9.26
 % JiQiulei thrillerlemon@outlook.com
 clear;clc
-
+warning('off')
 
 %输入验证次数1-5
 i=2;
