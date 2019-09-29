@@ -23,8 +23,8 @@ for i = 1:5
     %Test ALLtrainMT
     mtrespath = 'E:\OFFICE\MTE_NEE_DATA\IFregress\RunResult\';
     %ÐèÒªÐÞ¸Ä
-    load([mtrespath, 'MTNoIF_RandomCorssValind',num2str(i),'.mat']);
-    load([mtrespath, 'NoIF_RandomCorssValindVar_', num2str(i), '.mat']);
+    load([mtrespath, 'MTRandomCorssValind',num2str(i),'.mat']);
+    load([mtrespath, 'RandomCorssValindVar_', num2str(i), '.mat']);
     %get predict value
     PredictTrainY = MTpredict(mtree, TrainSplitX, TrainRegressX, binCat);
     PredictTestY = MTpredict(mtree, TestSplitX, TestRegressX, binCat);
@@ -44,9 +44,9 @@ for i = 1:5
     TrainSMinfo = rawData(train, :);
     TestSMinfo = rawData(test, :);
     
-    xlswrite([mtrespath,'NoIF_RandomMTtrainInfo_',num2str(i),'.xls'], [dataHead,'PredictTrainY';TrainSMinfo,num2cell(PredictTrainY)]);
-    xlswrite([mtrespath,'NoIF_RandomMTtestInfo_',num2str(i),'.xls'], [dataHead,'PredictTestY';TestSMinfo,num2cell(PredictTestY)]);
+    xlswrite([mtrespath,'RandomMTtrainInfo_',num2str(i),'.xls'], [dataHead,'PredictTrainY';TrainSMinfo,num2cell(PredictTrainY)]);
+    xlswrite([mtrespath,'RandomMTtestInfo_',num2str(i),'.xls'], [dataHead,'PredictTestY';TestSMinfo,num2cell(PredictTestY)]);
 
 end
-save([mtrespath, 'TestEveryNoIF_RandomMTEnv_Var']);
+save([mtrespath, 'TestEveryRandomMTEnv_Var']);
 disp('OK')
