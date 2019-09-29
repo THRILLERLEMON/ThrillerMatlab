@@ -268,5 +268,33 @@ mtepredict|根据模型树组合输出预测值|模型树组合和解释变量|�
  
 6、运行结果
 >在/home/JiQiulei/MTE_JQL_2019/MTE_RunRes路径中生成
+ Forest1.mat
+ Forest2.mat
+ Forest3.mat
+ Forest4.mat
+ Forest5.mat
+ Forest6.mat
+ Forest7.mat
+ Forest8.mat
+ Forest9.mat
+ Forest10.mat
 
 
+*第十次运行-2019年9月27日*
+1、运行平台
+>Windows
+
+2、执行内容
+>将第八次运行生成的10个100棵树的Forest合并成1000棵树的森林
+
+3、使用脚本
+>Combine10Forest.m
+
+4、运行目录
+>Windows
+
+5、运行命令
+>Windows Matlab
+
+6、运行结果
+>存储在运行结果文件夹

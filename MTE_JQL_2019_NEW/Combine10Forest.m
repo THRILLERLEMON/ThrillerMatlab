@@ -1,10 +1,10 @@
 % Combine 10 forests
-% Linux
+% Windows 10 1903
 % 2019.9.29
 % JiQiulei thrillerlemon@outlook.com
 clear;clc
 
-matPath='/home/JiQiulei/MTE_JQL_2019/MTE_RunRes/';
+matPath='E:\OFFICE\MTE_NEE_DATA\RunResult\Run9\';
 allMTrees=[];
 for i = 1:10
     load([matPath,'Forest',num2str(i),'.mat']);
@@ -12,7 +12,7 @@ for i = 1:10
         allMTrees=forest;
         continue;
     end
-    allMTrees = CombineF(allMTrees,forest);
+    allMTrees = [allMTrees,forest];
 end
 save([matPath,'Forest1000.mat'],'allMTrees');
 disp('OK');
