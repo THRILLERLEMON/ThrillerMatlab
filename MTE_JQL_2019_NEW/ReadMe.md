@@ -298,3 +298,24 @@ mtepredict|根据模型树组合输出预测值|模型树组合和解释变量|�
 
 6、运行结果
 >存储在运行结果文件夹
+
+*第十一次运行-2019年9月27日*
+1、运行平台
+>Linux
+
+2、执行内容
+>计算1000棵树的森林的组合的效果R2信息
+
+3、使用脚本
+>GetMTEPredictInfo.m
+
+4、运行目录
+>/home/JiQiulei/MTE_JQL_2019
+
+5、运行命令
+>nohup /opt/matlab/MATLAB/R2014b/bin/matlab -nodisplay -nodesktop < GetMTEPredictInfo.m 1>RunGMTEI.log 2>RunGMTEI.err &
+
+6、运行结果
+>在/home/JiQiulei/MTE_JQL_2019/MTE_RunRes路径中生成
+ MTE_R2Info.mat
+ MTEINFO_EnvVar.mat

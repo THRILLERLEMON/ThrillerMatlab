@@ -1,14 +1,15 @@
 % Output Best MTE
-% Linux
-% 2019.9.20
+% Windows 10 1903
+% 2019.9.30
 % JiQiulei thrillerlemon@outlook.com
 clear;clc
 
-bestNumberOfTree=20;
+bestNumberOfTree=16;
+
 % load
-forestpath = 'D:\OneDrive\SharedFile\MTE_NEE\JiQiulei20180928\result\Forest1.mat';
+forestpath = 'E:\OFFICE\MTE_NEE_DATA\RunResult\Run10\Forest1000.mat';
 load(forestpath);
 
 bestMTE = TF(forest, bestNumberOfTree);
-save('/home/JiQiulei/MTE_JQL_2019/MTE_RunRes/bestMTE.mat','bestMTE');
+save('E:\OFFICE\MTE_NEE_DATA\RunResult\bestMTE.mat','bestMTE');
 disp('OK output best MTE');
