@@ -19,7 +19,7 @@ for i = 1:100
     R2(1, i) = i;
     ensemble = TF(allMTrees, i);
     PredictAllY = mtepredict(ensemble, AllSplitX, AllRegressX, binCat);
-    [~,stats] = test(PredictAllY, AllY, 1);
+    [~,stats] = test(PredictAllY, AllY, 2);
     R2(2, i) = stats(1);
     eststr = ['Completing :', num2str(i), ' Trees Ensemble'];
     disp(eststr);

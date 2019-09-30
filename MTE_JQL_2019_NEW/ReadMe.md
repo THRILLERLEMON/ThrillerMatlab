@@ -26,19 +26,22 @@
 
 **脚本介绍**
 
-脚本名称|作用|输入|直接输出|输出文件名称格式
-:-:|:-:|:-:|:-:|:-:
-**AllDataTrainAMT**|构建一颗模型树|全部训练数据（xlsx）|训练脚本中的变量和模型树|Training_EnvVar.mat;MTAllTrain.mat
-**CrossValind**|交叉验证|训练数据|5次交叉验证的模型树|验证的变量和验证生成的模型树
-mtbuild|构建模型树|训练数据|模型树（mat）|MT*N*(N为第几次交叉验证)
-**TestEveryMT**|验证模型树|模型树和测试训练数据|每一颗模型树的预测值和真值|TestEveryMT_*N*.mat(N为第几次交叉验证)
-MTpredict|使用单个树计算预测值|模型树和解释变量数据|一颗模型树的预测值|matlab变量
-**MakeForestGetMTE**|生成森林并生成模型树组合信息|模型树和训练数据|森林和组合信息|Forest1.mat和MTE_R2Info.mat
-mtEnsemble|生成森林和树组合|模型树和其他训练数据|森林（mat）和组合（mat）|Forest1.mat和MTE1.mat
-Found_Best_Ensemble_From_Forest|在森林中寻找最优组合|森林和其他数据|返回MTE预测值和真值的对比矩阵|matlab变量
-TF|在森林中提取一定个数的MTE|森林和想要的MTE中树的数量|返回MTE|matlab变量
-mtepredict|根据模型树组合输出预测值|模型树组合和解释变量|返回预测值|matlab变量
-**OutputBestMTE**|输出最优MTE|根据森林和最优组合树数|输出MTE|MTEbest.mat
+脚本名称|作用|输入|直接输出|输出文件名称格式|备注
+:-:|:-:|:-:|:-:|:-:|:-:
+**AllDataTrainAMT**|构建一颗模型树|全部训练数据（xlsx）|训练脚本中的变量和模型树|Training_EnvVar.mat;MTAllTrain.mat|无
+**CrossValind*N***|交叉验证|训练数据|5次交叉验证的模型树|验证的变量和验证生成的模型树|无
+mtbuild|构建模型树|训练数据|模型树（mat）|MT*N*(N为第几次交叉验证)|无
+**TestEveryMT**|验证模型树|模型树和测试训练数据|每一颗模型树的预测值和真值|TestEveryMT_*N*.mat(N为第几次交叉验证)|无
+MTpredict|使用单个树计算预测值|模型树和解释变量数据|一颗模型树的预测值|matlab变量|无
+**MakeForest*N***|生成森林|根据模型树生成森林|森林|Forest*N*.mat|可能需要分部执行，之后使用Combine10Forest.m进行合并
+mtEnsemble|生成森林和树组合|模型树和其他训练数据|森林（mat）和组合（mat）|Forest1.mat和MTE1.mat|无
+**GetMTEPredictInfo**|在森林中寻找最优组合|森林和其他数据|返回MTE预测值和真值的对比矩阵|matlab变量|无
+TF|在森林中提取一定个数的MTE|森林和想要的MTE中树的数量|返回MTE|matlab变量|无
+mtepredict|根据模型树组合输出预测值|模型树组合和解释变量|返回预测值|matlab变量|无
+test|输出MTE预测值和真值的R2|训练数据和MTE|返回MTE得出的均（中）值和真值回归的R2信息|matlab变量|无
+**OutputBestMTE**|输出最优MTE|根据森林和最优组合树数|输出MTE|MTEbest.mat|无
+**MT_Susceptibility_*RegressSplit*Var**|使用MT进行变量的敏感性实验|训练数据和模型树（MT）|输出个别解释变量变化后的预测值|excel文件|MTE_Susceptibility_*RegressSplit*Var类似
+**VarSusceptibilityInfo**|对敏感性实验的数据进行处理|敏感性实验的输出数据|输出变量变化的均值和方差|excel文件|无
 
 **运行日志**
 *第一次运行-2019年9月21日*
@@ -319,3 +322,41 @@ mtepredict|根据模型树组合输出预测值|模型树组合和解释变量|�
 >在/home/JiQiulei/MTE_JQL_2019/MTE_RunRes路径中生成
  MTE_R2Info.mat
  MTEINFO_EnvVar.mat
+
+*第十二次运行-2019年9月27日*
+1、运行平台
+>Windows
+
+2、执行内容
+>导出最优的MTE
+
+3、使用脚本
+>OutputBestMTE.m
+
+4、运行目录
+>Windows
+
+5、运行命令
+>Windows Matlab
+
+6、运行结果
+>存储在运行结果文件夹
+
+*第十三次运行-2019年9月27日*
+1、运行平台
+>Windows
+
+2、执行内容
+>使用bestMTE进行变量敏感度测试
+
+3、使用脚本
+>MTE_Susceptibility_RegressSplitVar.m
+ MTE_Susceptibility_SplitVarOnly.m
+4、运行目录
+>Windows
+
+5、运行命令
+>Windows Matlab
+
+6、运行结果
+>存储在运行结果文件夹

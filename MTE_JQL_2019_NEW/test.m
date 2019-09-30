@@ -16,7 +16,7 @@ switch number
         end
     case 2
         for i = 1:size(Ytest, 1)
-            Y1(i, 1) = mean(Ytest(i,:))-0.5;
+            Y1(i, 1) = mean(Ytest(i,:));
         end
     case 3
         for i = 1:size(Ytest, 1)
