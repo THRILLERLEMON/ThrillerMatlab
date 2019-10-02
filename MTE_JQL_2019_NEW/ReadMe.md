@@ -360,3 +360,7 @@ test|输出MTE预测值和真值的R2|训练数据和MTE|返回MTE得出的均�
 
 6、运行结果
 >存储在运行结果文件夹
+
+
+Run Calculate_NEE
+nohup /opt/matlab/MATLAB/R2014b/bin/matlab -nodisplay -nodesktop < Calculate_NEE.m 1>RunCN.log 2>RunCN.err &

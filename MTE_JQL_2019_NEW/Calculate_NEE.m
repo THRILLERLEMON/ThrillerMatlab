@@ -14,6 +14,13 @@ MARH_path = '/home/LiShuai/Data/MA_relative_humidity'; % Mean annual relative hu
 GSL_path = '/home/LiShuai/Data/growlength_year'; % Growing season length derived from fAPAR
 IGBP_path = '/home/LiShuai/Data/IGBP_veg_type/GIGBP_Resemble_10KM'; % vegetation type
 
+GSOC_path = '/home/JiQiulei/MTE_JQL_2019/NewAddData/GSOC'; % new add by JQL global soil organic carbon
+elevation_path = '/home/JiQiulei/MTE_JQL_2019/NewAddData/elevation_MERIT_10km'; % new add by JQL dem elevation
+slope_path = '/home/JiQiulei/MTE_JQL_2019/NewAddData/slope_MERIT_10km'; % new add by JQL dem slope
+tpi_path = '/home/JiQiulei/MTE_JQL_2019/NewAddData/tpi_MERIT_10km'; % new add by JQL dem topographic index
+twi_path = '/home/JiQiulei/MTE_JQL_2019/NewAddData/twi_MERIT_10km'; % new add by JQL dem topographic wetness index
+vbf_path = '/home/JiQiulei/MTE_JQL_2019/NewAddData/vbf_MERIT_10km'; % new add by JQL dem valley bottom index
+
 %% month but static over the year
 MMT_path = '/home/LiShuai/Data/MM_temperature'; % Mean monthly temperature
 MMPre_path = '/home/LiShuai/Data/MM_precipitation'; % Mean monthly Precipetation sum
@@ -32,6 +39,10 @@ SF_SR_path = '/home/LiShuai/Data/sumfapar_growseason.shortR_year'; % Sum of fAPA
 MeanFG_path = '/home/LiShuai/Data/meanfapar_growseason_year'; % Mean fAPAR of the growing season
 MaxF_SR_path = '/home/LiShuai/Data/maxfapar.shortR_year'; % Maximum of fAPAR * Short radiation of year
 Intensive_frac_path = '/home/LiShuai/Data/Grass_Management/Intensive_frac'; %intensive fraction
+
+Manure_path = '/home/JiQiulei/MTE_JQL_2019/NewAddData/Manure_Application1982_2011'; %new add by JQL Manure_Application
+Nfertilizer_path = '/home/JiQiulei/MTE_JQL_2019/NewAddData/Nfertilizer_Application1982_2011'; %new add by JQL Nfertilizer Application
+NDeposition_path = '/home/JiQiulei/MTE_JQL_2019/NewAddData/N_Deposition1982_2011'; %new add by JQL N_Deposition
 
 %% month
 MT_path = '/home/LiShuai/Data/tem'; % Monthly Temperature
@@ -53,9 +64,9 @@ CO2_path = '/home/LiShuai/Data/198201-201112_co2.xlsx'; %CO2 month
 %Wind_path = '/home/LiShuai/Data/Wind'; %all wind 
 
 %% outpath
-NEE_outpath = '/home/LiShuai/NEE_Train_for_upscale/Result';
+NEE_outpath = '/home/JiQiulei/MTE_JQL_2019/NEE_Upscale';
 out_prefix = '_global_grass_NEE';% the name after year_month
-out_bv = -99999;     %set the backvalue
+out_bv = -9999;     %set the backvalue
 
 %% read
 imnames_MAT = dir(fullfile(MAT_path,'/','*.tif'));
@@ -66,6 +77,14 @@ imnames_MAIR = dir(fullfile(MAIR_path,'/','*.tif'));
 imnames_MARH = dir(fullfile(MARH_path,'/','*.tif'));
 imnames_GSL = dir(fullfile(GSL_path,'/','*.tif'));
 imnames_IGBP = dir(fullfile(IGBP_path,'/','*.tif'));
+
+%add by JQL
+imnames_GSOC = dir(fullfile(GSOC_path,'/','*.tif'));
+imnames_elevation = dir(fullfile(elevation_path,'/','*.tif'));
+imnames_slope = dir(fullfile(slope_path,'/','*.tif'));
+imnames_tpi = dir(fullfile(tpi_path,'/','*.tif'));
+imnames_twi = dir(fullfile(twi_path,'/','*.tif'));
+imnames_vbf = dir(fullfile(vbf_path,'/','*.tif'));
 
 imnames_MMT = dir(fullfile(MMT_path,'/','*.tif'));
 imnames_MMPre = dir(fullfile(MMPre_path,'/','*.tif'));
@@ -83,6 +102,11 @@ imnames_SF_SR = dir(fullfile(SF_SR_path,'/','*.tif'));
 imnames_MeanFG = dir(fullfile(MeanFG_path,'/','*.tif'));
 imnames_MaxF_SR = dir(fullfile(MaxF_SR_path,'/','*.tif'));
 imnames_Intensive_frac = dir(fullfile(Intensive_frac_path,'/','*.tif')); 
+
+%add by JQL
+imnames_Manure = dir(fullfile(Manure_path,'/','*.tif')); 
+imnames_Nfertilizer = dir(fullfile(Nfertilizer_path,'/','*.tif')); 
+imnames_NDeposition = dir(fullfile(NDeposition_path,'/','*.tif')); 
 
 imnames_MT = dir(fullfile(MT_path,'/','*.tif'));
 imnames_MPre = dir(fullfile(MPre_path,'/','*.tif'));
@@ -116,9 +140,18 @@ temp_MARH = geotiffread(fullfile(MARH_path, imnames_MARH(1).name));
 temp_GSL = geotiffread(fullfile(GSL_path, imnames_GSL(1).name));
 temp_IGBP = geotiffread(fullfile(IGBP_path, imnames_IGBP(1).name));
 
+%add by JQL
+temp_GSOC = geotiffread(fullfile(GSOC_path, imnames_GSOC(1).name));
+temp_elevation = geotiffread(fullfile(elevation_path, imnames_elevation(1).name));
+temp_slope = geotiffread(fullfile(slope_path, imnames_slope(1).name));
+temp_tpi = geotiffread(fullfile(tpi_path, imnames_tpi(1).name));
+temp_twi = geotiffread(fullfile(twi_path, imnames_twi(1).name));
+temp_vbf = geotiffread(fullfile(vbf_path, imnames_vbf(1).name));
+
 %% calculate
-binCat = zeros(1, 37);
-for kk = 1982:2011
+binCat = zeros(1, 46);
+% for kk = 1982:2011
+for kk = 1982:1984
     %year
     temp_MaxFY = geotiffread(fullfile(MaxFY_path, imnames_MaxFY(kk - 1981).name));
     temp_MinFY = geotiffread(fullfile(MinFY_path, imnames_MinFY(kk - 1981).name));
@@ -128,6 +161,11 @@ for kk = 1982:2011
     temp_MeanFG = geotiffread(fullfile(MeanFG_path, imnames_MeanFG(kk - 1981).name));
     temp_MaxF_SR = geotiffread(fullfile(MaxF_SR_path, imnames_MaxF_SR(kk - 1981).name));
     temp_Intensive_frac = geotiffread(fullfile(Intensive_frac_path, imnames_Intensive_frac(kk - 1981).name));
+
+    %add by JQL
+    temp_Manure = geotiffread(fullfile(Manure_path, imnames_Manure(kk - 1981).name));
+    temp_Nfertilizer = geotiffread(fullfile(Nfertilizer_path, imnames_Nfertilizer(kk - 1981).name));
+    temp_NDeposition = geotiffread(fullfile(NDeposition_path, imnames_NDeposition(kk - 1981).name));
     
     temp_CO2_month_data1 = temp_CO2(((kk-1982)*12+1):(kk-1981)*12, 1);
     
@@ -216,9 +254,10 @@ for kk = 1982:2011
         %temp_V_P = geotiffread(fullfile(V_P_path, imnames_V_P((kk - 1982) * 12 + k).name));
         %temp_Wind = geotiffread(fullfile(Wind_path, imnames_Wind((kk - 1982) * 12 + k).name));
         
-        SplitX = NaN(1, 37);
+        SplitX = NaN(1, 46);
         RegressX = NaN(1, 6);
-        data = NaN(1752,4320);
+        %16 is the number of trees,add mean layer=17
+        data = NaN(1752,4320,17);
         for j = 1:size(data, 1)
             for jj = 1:size(data, 2)
                 if temp_IGBP(j, jj) == 1
@@ -266,6 +305,18 @@ for kk = 1982:2011
                     SplitX(1,36) = temp_EMT(j, jj);
                     SplitX(1,37) = temp_CO2_month_data;
                     
+                    %add by JQL
+                    SplitX(1,38) = temp_GSOC(j, jj);
+                    SplitX(1,39) = temp_elevation(j, jj);
+                    SplitX(1,40) = temp_slope(j, jj);
+                    SplitX(1,41) = temp_tpi(j, jj);
+                    SplitX(1,42) = temp_twi(j, jj);
+                    SplitX(1,43) = temp_vbf(j, jj);
+                    SplitX(1,44) = temp_Manure(ceil(j/6), ceil(jj/6));
+                    SplitX(1,45) = temp_Nfertilizer(ceil(j/6), ceil(jj/6));
+                    SplitX(1,46) = temp_NDeposition(ceil(j/6), ceil(jj/6));
+                    
+
                     %regression
                     RegressX(1,1) = temp_MT(ceil(j/6), ceil(jj/6));
                     RegressX(1,2) = temp_MPre(ceil(j/6), ceil(jj/6));
@@ -282,25 +333,35 @@ for kk = 1982:2011
                     %mte calculate
                     if nansum(isnan(SplitX)) == 0 && nansum(isnan(RegressX)) == 0
                         data1(1, :) = mtepredict(bestMTE, SplitX, RegressX, binCat);
-                        data(j, jj) = nanmean(data1(1, :));
+                        data(j, jj, 1:16) = data1(1, :);
+                        data(j, jj, 17) = nanmean(data1(1, :));
                         data1 = [];
                     else
-                        data(j, jj) = NaN;
+                        data(j, jj,:) = NaN;
                     end
                 else
-                    data(j, jj) = NaN;
+                    data(j, jj,:) = NaN;
                 end
             end
         end
         data(isnan(data)) = out_bv; 
         
         %% save
-        if k < 10
-            geotiffwrite([NEE_outpath,'/',num2str(kk), '0', num2str(k), out_prefix,'.tif'],data,R,'GeoKeyDirectoryTag', info.GeoTIFFTags.GeoKeyDirectoryTag);
-        else
-            geotiffwrite([NEE_outpath,'/',num2str(kk),num2str(k), out_prefix,'.tif'],data,R,'GeoKeyDirectoryTag', info.GeoTIFFTags.GeoKeyDirectoryTag);
+        for nlayer =1:17
+            if nlayer == 17
+                if k < 10
+                    geotiffwrite([NEE_outpath,'/',num2str(kk), '0', num2str(k), out_prefix,'_MTEmean.tif'],data(:,:,17),R,'GeoKeyDirectoryTag', info.GeoTIFFTags.GeoKeyDirectoryTag);
+                else
+                    geotiffwrite([NEE_outpath,'/',num2str(kk),num2str(k), out_prefix,'_MTEmean.tif'],data(:,:,17),R,'GeoKeyDirectoryTag', info.GeoTIFFTags.GeoKeyDirectoryTag);
+                end
+            else
+                if k < 10
+                    geotiffwrite([NEE_outpath,'/',num2str(kk), '0', num2str(k), out_prefix,'_MT',num2str(nlayer),'.tif'],data(:,:,nlayer),R,'GeoKeyDirectoryTag', info.GeoTIFFTags.GeoKeyDirectoryTag);
+                else
+                    geotiffwrite([NEE_outpath,'/',num2str(kk),num2str(k), out_prefix,'_MT',num2str(nlayer),'.tif'],data(:,:,nlayer),R,'GeoKeyDirectoryTag', info.GeoTIFFTags.GeoKeyDirectoryTag);
+                end
+            end
         end
-        
         data = [];
     end
     eatstr = ['Completed :  ',num2str((kk-1981)*100/(2011 - 1981)),'%'] ;

@@ -11,7 +11,7 @@ varPath='E:\OFFICE\MTE_NEE_DATA\RunResult\Run13\addmin20perOnlyChangeSplit\';
 getfilename=ls([varPath,'*.xls*']); 
 filename = cellstr(getfilename);
 num_of_files = length(filename); 
-varSusInfo={('Name'),('add20%ChangeMean'),('add20%Stdeva'),('min20%ChangeMean'),('min20%Stdeva')};
+varSusInfo={('Name_SiteYear'),('add20%ChangeMean'),('add20%Stdeva'),('min20%ChangeMean'),('min20%Stdeva')};
 for i=1:num_of_files 
     file_address=strcat(varPath,filename(i));
     %将cell转化为string
@@ -19,34 +19,50 @@ for i=1:num_of_files
     [num,txt,raw]=xlsread( file_address,'Sheet1');
     infoHead=raw(1,:);
     bgData=ones(size(raw,1)-1,1);
+    siteIndex=infoHead==string('站点');
     nianIndex=infoHead==string('年');
-    NEEIndex=infoHead==string('NEE');
     StandardYIndex=infoHead==string('PredictStandardY');
     add20perYIndex=infoHead==string('Predictadd20perY');
     min20perYIndex=infoHead==string('Predictmin20perY');
+
     tempRawData=[bgData,num];
+    site=string(raw(:, siteIndex));
+    site(1)=[];
     nian=tempRawData(:, nianIndex);
-    NEE=tempRawData(:, NEEIndex);
     StaY=tempRawData(:, StandardYIndex);
     add20perY=tempRawData(:, add20perYIndex);
     min20perY=tempRawData(:, min20perYIndex);
-    addChangePer=((add20perY-StaY)./StaY)*100;
-    minChangePer=((min20perY-StaY)./StaY)*100;
 
-    for y=1998:2006
-        varYear=[char(filename(i)),num2str(y)];
-        thisyear = (nian == y);
-        addChangePer(thisyear, :)
-        addchangeMean=mean(abs(addChangePer(thisyear, :)));
-        addchangeStd=std(abs(addChangePer(thisyear, :)));
-        minchangeMean=mean(abs(minChangePer(thisyear, :)));
-        minchangeStd=std(abs(minChangePer(thisyear, :)));
-        tempInfo=[{varYear},addchangeMean,addchangeStd,minchangeMean,minchangeStd];
-        varSusInfo=[varSusInfo;tempInfo];
+    sitenames=unique(site);
+    SiteYearData=[];
+    for nSite = 1:length(sitenames)
+        for y=1998:2006
+            pSite=sitenames(nSite);
+            thisSiteYear = ((nian == y)&(site==pSite));
+            thisSY_StaY=sum(StaY(thisSiteYear,:));
+            thisSY_add20perY=sum(add20perY(thisSiteYear,:));
+            thisSY_min20perY=sum(min20perY(thisSiteYear,:));
+            if thisSY_StaY==0 && thisSY_add20perY==0 && thisSY_min20perY==0
+                continue
+            end
+            siteYearTemp=[thisSY_StaY,thisSY_add20perY,thisSY_min20perY];
+            SiteYearData=[SiteYearData;siteYearTemp];
+        end
     end
-
+    allSY_StaY=SiteYearData(:,1);
+    allSY_add20perY=SiteYearData(:,2);
+    allSY_min20perY=SiteYearData(:,3);
+    addChangePer=((allSY_add20perY-allSY_StaY)./allSY_StaY)*100;
+    minChangePer=((allSY_min20perY-allSY_StaY)./allSY_StaY)*100;
+    addchangeMean=mean(abs(addChangePer));
+    addchangeStd=std(abs(addChangePer));
+    minchangeMean=mean(abs(minChangePer));
+    minchangeStd=std(abs(minChangePer));
+    tempInfo=[filename(i),addchangeMean,addchangeStd,minchangeMean,minchangeStd];
+    varSusInfo=[varSusInfo;tempInfo];
 end
 
-xlswrite(['E:\OFFICE\MTE_NEE_DATA\RunResult\','MTE_SusceptibilityInfo_OnlySplitVar.xls'], varSusInfo);
+xlswrite(['E:\OFFICE\MTE_NEE_DATA\RunResult\','MTE_SusceptibilityInfo_OnlySplitVar_SiteYearChange.xls'], varSusInfo);
 disp('ok!')
+
 
