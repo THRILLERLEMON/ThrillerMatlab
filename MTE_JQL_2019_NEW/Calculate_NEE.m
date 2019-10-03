@@ -133,10 +133,13 @@ R=info.RefMatrix;
 %% static(0.5)
 temp_MAT = geotiffread(fullfile(MAT_path, imnames_MAT(1).name));
 temp_MAPre = geotiffread(fullfile(MAPre_path, imnames_MAPre(1).name));
+temp_MAPre(temp_MAPre>=999999)=NaN;
 temp_MACWB = geotiffread(fullfile(MACWB_path, imnames_MACWB(1).name));
 temp_MAPET = geotiffread(fullfile(MAPET_path, imnames_MAPET(1).name));
+temp_MAPET(temp_MAPET>=999999)=NaN;
 temp_MAIR = geotiffread(fullfile(MAIR_path, imnames_MAIR(1).name));
 temp_MARH = geotiffread(fullfile(MARH_path, imnames_MARH(1).name));
+temp_MARH(temp_MARH>=999999)=NaN;
 temp_GSL = geotiffread(fullfile(GSL_path, imnames_GSL(1).name));
 temp_IGBP = geotiffread(fullfile(IGBP_path, imnames_IGBP(1).name));
 
@@ -151,7 +154,7 @@ temp_vbf = geotiffread(fullfile(vbf_path, imnames_vbf(1).name));
 %% calculate
 binCat = zeros(1, 46);
 % for kk = 1982:2011
-for kk = 1982:1984
+for kk = 1982:2011
     %year
     temp_MaxFY = geotiffread(fullfile(MaxFY_path, imnames_MaxFY(kk - 1981).name));
     temp_MinFY = geotiffread(fullfile(MinFY_path, imnames_MinFY(kk - 1981).name));
@@ -328,8 +331,8 @@ for kk = 1982:1984
                     %RegressX(1,5) = temp_MF_MSR(j, jj);
 
                     %background set to NaN
-                    SplitX(SplitX(:)>10000000000 | SplitX(:)<=-9999) = NaN;
-                    RegressX(RegressX(:)>10000000000 | RegressX(:)<=-9999) = NaN;
+                    SplitX(SplitX(:)>=1000000000 | SplitX(:)<=-9999) = NaN;
+                    RegressX(RegressX(:)>=1000000000 | RegressX(:)<=-9999) = NaN;
                     %mte calculate
                     if nansum(isnan(SplitX)) == 0 && nansum(isnan(RegressX)) == 0
                         data1(1, :) = mtepredict(bestMTE, SplitX, RegressX, binCat);
