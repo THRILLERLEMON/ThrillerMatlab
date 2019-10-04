@@ -255,7 +255,7 @@ test|输出MTE预测值和真值的R2|训练数据和MTE|返回MTE得出的均�
  mtEnsemble.m（10个）
  
 4、运行目录
->/home/JiQiulei/MTE_JQL_2019
+>/home/JiQiulei/MTE_JQL_2019_IFregress
 
 5、运行命令
 >nohup /opt/matlab/MATLAB/R2014b/bin/matlab -nodisplay -nodesktop < MakeForest1.m 1>RunMF1.log 2>RunMF1.err &
@@ -363,4 +363,10 @@ test|输出MTE预测值和真值的R2|训练数据和MTE|返回MTE得出的均�
 
 
 Run Calculate_NEE
-nohup /opt/matlab/MATLAB/R2014b/bin/matlab -nodisplay -nodesktop < Calculate_NEE.m 1>RunCN.log 2>RunCN.err &
+nohup /opt/matlab/MATLAB/R2014b/bin/matlab -nodisplay -nodesktop < Calculate_NEE1.m 1>RunCN1.log 2>RunCN1.err &
+nohup /opt/matlab/MATLAB/R2014b/bin/matlab -nodisplay -nodesktop < Calculate_NEE2.m 1>RunCN2.log 2>RunCN2.err &
+nohup /opt/matlab/MATLAB/R2014b/bin/matlab -nodisplay -nodesktop < Calculate_NEE3.m 1>RunCN3.log 2>RunCN3.err &
+nohup /opt/matlab/MATLAB/R2014b/bin/matlab -nodisplay -nodesktop < Calculate_NEE4.m 1>RunCN4.log 2>RunCN4.err &
+nohup /opt/matlab/MATLAB/R2014b/bin/matlab -nodisplay -nodesktop < Calculate_NEE5.m 1>RunCN5.log 2>RunCN5.err &
+nohup /opt/matlab/MATLAB/R2014b/bin/matlab -nodisplay -nodesktop < Calculate_NEE6.m 1>RunCN6.log 2>RunCN6.err &
+nohup /opt/matlab/MATLAB/R2014b/bin/matlab -nodisplay -nodesktop < Calculate_NEE7.m 1>RunCN7.log 2>RunCN7.err &
