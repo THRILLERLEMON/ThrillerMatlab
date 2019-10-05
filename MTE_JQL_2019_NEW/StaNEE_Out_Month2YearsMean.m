@@ -1,4 +1,4 @@
-% output Years sum NEE (Unit=g c/m2/year) flux
+% output Years mean NEE (Unit=g c/m2/year) flux
 % Linux
 % 2019.10.4
 % JiQiulei thrillerlemon@outlook.com
@@ -29,6 +29,6 @@ for y = yearSE(1):yearSE(2)
 end
 YearsMean=nanmean(grassNEE,3);
 YearsMean(isnan(YearsMean)) = -9999; 
-geotiffwrite([outputPath,'YearsMean',num2str(yearSE(1)),'-',num2str(yearSE(2)),'NEEsum2Year_flux.tif'],YearsMean,Rmat);
+geotiffwrite([outputPath,'YearsMean_',num2str(yearSE(1)),'-',num2str(yearSE(2)),'(NEEsum2Year_flux).tif'],YearsMean,Rmat);
 
 disp('Finish!')

@@ -5,7 +5,10 @@
 % JiQiulei thrillerlemon@outlook.com
 clear;clc
 
-%%  input
+%%%%%%%%%在这里修改年份
+% yearSE=[2000,2011];
+% yearSE=[1982,1989];
+yearSE=[1982,2011];
 
 NEEDataPath='/home/JiQiulei/MTE_JQL_2019/NEE_Upscale/';
 
@@ -14,7 +17,7 @@ GrassPer(GrassPer==GrassPer(1,1)) = nan;
 CliZones= imread('/home/JiQiulei/MTE_JQL_2019/grasslands_5climate_zones.tif');
 
 outputPath='/home/JiQiulei/MTE_JQL_2019/NEE_Sta/';
-outYearDataPath='/home/JiQiulei/MTE_JQL_2019/NEE_Upscale_Sum2Year';
+outYearDataPath='/home/JiQiulei/MTE_JQL_2019/NEE_Upscale_Sum2Year/';
 
 %%  operate
 gridSizze=1/12;
@@ -30,8 +33,22 @@ S1 = referenceSphere('earth','km');
 [~,colarea] = areamat(wdzone,Rmat,S1);
 wdarea = repmat(colarea,1,ncols);
 
-grassNEE = NaN(1752,4320,30);
-for y = 1982:2011
+
+zoneALLsum=[];
+zoneALLmean=[];
+zone1sum=[];
+zone1mean=[];
+zone2sum=[];
+zone2mean=[];
+zone3sum=[];
+zone3mean=[];
+zone4sum=[];
+zone4mean=[];
+zone5sum=[];
+zone5mean=[];
+
+grassNEE = NaN(1752,4320,yearSE(1)-yearSE(2)+1);
+for y = yearSE(1):yearSE(2)
     monthData=NaN(1752,4320,12);
     for m = 1:12
         monthNEE=imread([NEEDataPath,num2str(y),num2str(m,'%02d'),'_global_grass_NEE_MTEmean.tif']);
@@ -40,45 +57,59 @@ for y = 1982:2011
     end
     thisYearSum=nansum(monthData,3);
     totalNEEYear = thisYearSum.*repmat(wdarea,1,1,size(thisYearSum,3)).*repmat(GrassPer,1,1,size(thisYearSum,3))/10^9;  % PgC/year
-    grassNEE(:,:,y-1982+1)=totalNEEYear;
+    grassNEE(:,:,y-yearSE(1)+1)=totalNEEYear;
 
-    thisYearSum(isnan(thisYearSum)) = -9999; 
-    geotiffwrite([outYearDataPath,num2str(y),'NEEsum2Year_flux.tif'],thisYearSum,Rmat);
+    zoneALLsum=[zoneALLsum;nansum(nansum(totalNEEYear))];
+    zoneALLmean=[zoneALLmean;nanmean(nanmean(totalNEEYear))];
+
+    zone1sum=[zone1sum;nansum(nansum(totalNEEYear(CliZones==1)))];
+    zone1mean=[zone1mean;nanmean(nanmean(totalNEEYear(CliZones==1)))];
+    zone2sum=[zone2sum;nansum(nansum(totalNEEYear(CliZones==2)))];
+    zone2mean=[zone2mean;nanmean(nanmean(totalNEEYear(CliZones==2)))];
+    zone3sum=[zone3sum;nansum(nansum(totalNEEYear(CliZones==3)))];
+    zone3mean=[zone3mean;nanmean(nanmean(totalNEEYear(CliZones==3)))];
+    zone4sum=[zone4sum;nansum(nansum(totalNEEYear(CliZones==4)))];
+    zone4mean=[zone4mean;nanmean(nanmean(totalNEEYear(CliZones==4)))];
+    zone5sum=[zone5sum;nansum(nansum(totalNEEYear(CliZones==5)))];
+    zone5mean=[zone5mean;nanmean(nanmean(totalNEEYear(CliZones==5)))];
+
+    % thisYearSum(isnan(thisYearSum)) = -9999; 
+    % geotiffwrite([outYearDataPath,num2str(y),'NEEsum2Year_flux.tif'],thisYearSum,Rmat);
 end
 
 
 
-zoneALLsum=squeeze(nansum(nansum(grassNEE,2),1));
-zoneALLmean=squeeze(nanmean(nanmean(grassNEE,2),1));
+% zoneALLsum=squeeze(nansum(nansum(grassNEE,2),1));
+% zoneALLmean=squeeze(nanmean(nanmean(grassNEE,2),1));
 
-zone1NEE=grassNEE(CliZones==1);
-zone1sum=squeeze(nansum(nansum(zone1NEE,2),1));
-zone2NEE=grassNEE(CliZones==2);
-zone2sum=squeeze(nansum(nansum(zone1NEE,2),1));
-zone3NEE=grassNEE(CliZones==3);
-zone3sum=squeeze(nansum(nansum(zone1NEE,2),1));
-zone4NEE=grassNEE(CliZones==4);
-zone4sum=squeeze(nansum(nansum(zone1NEE,2),1));
-zone5NEE=grassNEE(CliZones==5);
-zone5sum=squeeze(nansum(nansum(zone1NEE,2),1));
-
-
-zone1mean=squeeze(nanmean(nanmean(zone1NEE,2),1));
-zone2mean=squeeze(nanmean(nanmean(zone1NEE,2),1));
-zone3mean=squeeze(nanmean(nanmean(zone1NEE,2),1));
-zone4mean=squeeze(nanmean(nanmean(zone1NEE,2),1));
-zone5mean=squeeze(nanmean(nanmean(zone1NEE,2),1));
-
-outData=[
-[string('Zones'),string('YearsSum'),string('YearsMean')];
-[string('Global'),zoneALLsum,zoneALLmean];
-[string('Zone1'),zone1sum,zone1mean];
-[string('Zone2'),zone2sum,zone2mean];
-[string('Zone3'),zone3sum,zone3mean];
-[string('Zone4'),zone4sum,zone4mean];
-[string('Zone5'),zone5sum,zone5mean];];
+% yearSE=[1982,2011];
+% colNamesGl=[];
+% colNamesZ1=[];
+% colNamesZ2=[];
+% colNamesZ3=[];
+% colNamesZ4=[];
+% colNamesZ5=[];
+% for yyy = yearSE(1):yearSE(2)
+%     colNamesGl=[string(colNamesGl);string(['Global_',num2str(yyy)])];
+%     colNamesZ1=[string(colNamesZ1);string(['Zone1_',num2str(yyy)])];
+%     colNamesZ2=[string(colNamesZ2);string(['Zone2_',num2str(yyy)])];
+%     colNamesZ3=[string(colNamesZ3);string(['Zone3_',num2str(yyy)])];
+%     colNamesZ4=[string(colNamesZ4);string(['Zone4_',num2str(yyy)])];
+%     colNamesZ5=[string(colNamesZ5);string(['Zone5_',num2str(yyy)])];
+% end
 
 
-dlmwrite(outputPath,'StaNEEinZones_NEEsum2Years_flux.txt',outData);
+% outGlobalData=[[[string('Zones'),string('YearsSum'),string('YearsMean')];...
+% [colNamesGl,zoneALLsum,zoneALLmean]];...
+% [colNamesZ1,zone1sum,zone1mean];...
+% [colNamesZ2,zone2sum,zone2mean];...
+% [colNamesZ3,zone3sum,zone3mean];...
+% [colNamesZ4,zone4sum,zone4mean];...
+% [colNamesZ5,zone5sum,zone5mean]];
+
+% xlswrite('out.xls', cellstr(outGlobalData));
+
+save([outputPath,num2str(yearSE(1)),'-',num2str(yearSE(2)),'StaNEE_Month2YearStainZones_EnvVar.mat'],'zoneALLsum','zoneALLmean','zone1sum','zone1mean','zone2sum','zone2mean','zone3sum','zone3mean','zone4sum','zone4mean','zone5sum','zone5mean');
 
 disp('Finish!')
+

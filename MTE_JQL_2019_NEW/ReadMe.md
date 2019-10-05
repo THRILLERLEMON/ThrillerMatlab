@@ -369,3 +369,13 @@ nohup /opt/matlab/MATLAB/R2014b/bin/matlab -nodisplay -nodesktop < Calculate_NEE
 nohup /opt/matlab/MATLAB/R2014b/bin/matlab -nodisplay -nodesktop < Calculate_NEE4.m 1>RunCN4.log 2>RunCN4.err &
 nohup /opt/matlab/MATLAB/R2014b/bin/matlab -nodisplay -nodesktop < Calculate_NEE5.m 1>RunCN5.log 2>RunCN5.err &
 nohup /opt/matlab/MATLAB/R2014b/bin/matlab -nodisplay -nodesktop < Calculate_NEE6.m 1>RunCN6.log 2>RunCN6.err &
+
+
+StaNEE_Month2YearStainZones
+nohup /opt/matlab/MATLAB/R2014b/bin/matlab -nodisplay -nodesktop < StaNEE_Month2YearStainZones.m 1>RunM2YS.log 2>RunM2YS.err &
+
+StaNEE_Out_Month2YearsMean
+nohup /opt/matlab/MATLAB/R2014b/bin/matlab -nodisplay -nodesktop < StaNEE_Out_Month2YearsMean.m 1>RunOYSM.log 2>RunOYSM.err &
+
+StaNEE_Month2Season
+nohup /opt/matlab/MATLAB/R2014b/bin/matlab -nodisplay -nodesktop < StaNEE_Month2Season.m 1>RunM2S.log 2>RunM2S.err &
