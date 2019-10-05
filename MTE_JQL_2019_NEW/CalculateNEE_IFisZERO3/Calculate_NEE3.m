@@ -64,8 +64,8 @@ CO2_path = '/home/LiShuai/Data/198201-201112_co2.xlsx'; %CO2 month
 %Wind_path = '/home/LiShuai/Data/Wind'; %all wind 
 
 %% outpath
-NEE_outpath = '/home/JiQiulei/MTE_JQL_2019/NEE_Upscale_PART';
-out_prefix = '_global_grass_NEE';% the name after year_month
+NEE_outpath = '/home/JiQiulei/MTE_JQL_2019/NEE_Upscale_IFisZERO';
+out_prefix = '_global_grass_NEE_NoIF';% the name after year_month
 out_bv = -9999;     %set the backvalue
 
 %% read
@@ -154,7 +154,7 @@ temp_vbf = geotiffread(fullfile(vbf_path, imnames_vbf(1).name));
 %% calculate
 binCat = zeros(1, 46);
 % for kk = 1982:2011
-for kk = 2004:2004
+for kk = 1992:1996
     %year
     temp_MaxFY = geotiffread(fullfile(MaxFY_path, imnames_MaxFY(kk - 1981).name));
     temp_MinFY = geotiffread(fullfile(MinFY_path, imnames_MinFY(kk - 1981).name));
@@ -287,7 +287,8 @@ for kk = 2004:2004
                     SplitX(1,18) = temp_SF_SR(j, jj);
                     SplitX(1,19) = temp_MeanFG(j, jj);
                     SplitX(1,20) = temp_MaxF_SR(j, jj);
-                    SplitX(1,21) = temp_Intensive_frac(ceil(j/6), ceil(jj/6));
+                    % IF=0
+                    SplitX(1,21) = 0;
  
                     SplitX(1,22) = temp_MT(ceil(j/6), ceil(jj/6));
                     SplitX(1,23) = temp_MPre(ceil(j/6), ceil(jj/6));
@@ -336,8 +337,7 @@ for kk = 2004:2004
                     %mte calculate
                     if nansum(isnan(SplitX)) == 0 && nansum(isnan(RegressX)) == 0
                         data1(1, :) = mtepredict(bestMTE, SplitX, RegressX, binCat);
-                        data(j, jj, 1:16) = data1(1, :);
-                        data(j, jj, 17) = nanmean(data1(1, :));
+                        data(j, jj, 1) = nanmean(data1(1, :));
                         data1 = [];
                     else
                         data(j, jj,:) = NaN;
@@ -350,20 +350,10 @@ for kk = 2004:2004
         data(isnan(data)) = out_bv; 
         
         %% save
-        for nlayer =1:17
-            if nlayer == 17
-                if k < 10
-                    geotiffwrite([NEE_outpath,'/',num2str(kk), '0', num2str(k), out_prefix,'_MTEmean.tif'],data(:,:,17),R,'GeoKeyDirectoryTag', info.GeoTIFFTags.GeoKeyDirectoryTag);
-                else
-                    geotiffwrite([NEE_outpath,'/',num2str(kk),num2str(k), out_prefix,'_MTEmean.tif'],data(:,:,17),R,'GeoKeyDirectoryTag', info.GeoTIFFTags.GeoKeyDirectoryTag);
-                end
-            else
-                if k < 10
-                    geotiffwrite([NEE_outpath,'/',num2str(kk), '0', num2str(k), out_prefix,'_MT',num2str(nlayer),'.tif'],data(:,:,nlayer),R,'GeoKeyDirectoryTag', info.GeoTIFFTags.GeoKeyDirectoryTag);
-                else
-                    geotiffwrite([NEE_outpath,'/',num2str(kk),num2str(k), out_prefix,'_MT',num2str(nlayer),'.tif'],data(:,:,nlayer),R,'GeoKeyDirectoryTag', info.GeoTIFFTags.GeoKeyDirectoryTag);
-                end
-            end
+        if k < 10
+            geotiffwrite([NEE_outpath,'/',num2str(kk), '0', num2str(k), out_prefix,'_MTEmean.tif'],data(:,:,1),R,'GeoKeyDirectoryTag', info.GeoTIFFTags.GeoKeyDirectoryTag);
+        else
+            geotiffwrite([NEE_outpath,'/',num2str(kk),num2str(k), out_prefix,'_MTEmean.tif'],data(:,:,1),R,'GeoKeyDirectoryTag', info.GeoTIFFTags.GeoKeyDirectoryTag);
         end
         data = [];
     end

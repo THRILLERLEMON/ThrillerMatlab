@@ -369,4 +369,3 @@ nohup /opt/matlab/MATLAB/R2014b/bin/matlab -nodisplay -nodesktop < Calculate_NEE
 nohup /opt/matlab/MATLAB/R2014b/bin/matlab -nodisplay -nodesktop < Calculate_NEE4.m 1>RunCN4.log 2>RunCN4.err &
 nohup /opt/matlab/MATLAB/R2014b/bin/matlab -nodisplay -nodesktop < Calculate_NEE5.m 1>RunCN5.log 2>RunCN5.err &
 nohup /opt/matlab/MATLAB/R2014b/bin/matlab -nodisplay -nodesktop < Calculate_NEE6.m 1>RunCN6.log 2>RunCN6.err &
-nohup /opt/matlab/MATLAB/R2014b/bin/matlab -nodisplay -nodesktop < Calculate_NEE7.m 1>RunCN7.log 2>RunCN7.err &

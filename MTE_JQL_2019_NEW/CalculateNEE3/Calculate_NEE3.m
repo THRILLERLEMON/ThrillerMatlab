@@ -154,7 +154,7 @@ temp_vbf = geotiffread(fullfile(vbf_path, imnames_vbf(1).name));
 %% calculate
 binCat = zeros(1, 46);
 % for kk = 1982:2011
-for kk = 1993:1996
+for kk = 1996:1996
     %year
     temp_MaxFY = geotiffread(fullfile(MaxFY_path, imnames_MaxFY(kk - 1981).name));
     temp_MinFY = geotiffread(fullfile(MinFY_path, imnames_MinFY(kk - 1981).name));
