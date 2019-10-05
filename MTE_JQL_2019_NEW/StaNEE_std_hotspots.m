@@ -4,17 +4,18 @@
 % Linux
 % 2019.10.4
 % JiQiulei thrillerlemon@outlook.com
-clear;close all;clc;tic
-
 %%  input
+clear;clc;tic
 
-NEEDataPath='/home/JiQiulei/MTE_JQL_2019/NEE_Upscale/';
-
+NEEtotal_pt = '/home/JiQiulei/MTE_JQL_2019/NEE_Upscale_Sum2Year';
 efrg = [-5000,10000];
+sf = 1;
+hds = '';
+fts = 'NEEsum2Year_flux.tif';
 yrs = [1982,2011];
 
-outhd = 'NEEyearly';
-outpt = '/home/JiQiulei/MTE_JQL_2019/NEE_Sta/';
+outhd = 'NEESum2Year';
+outpt = '/home/JiQiulei/MTE_JQL_2019/NEE_Sta';
 
 %%  operate
 
@@ -24,21 +25,11 @@ Rmat = makerefmat('RasterSize',[nrw ncl],...
     'ColumnsStartFrom','north');
 
 disp('Reading...')
-rasall = NaN(1752,4320,30);
-for y = 1982:2011
-    monthData=NaN(1752,4320,12);
-    for m = 1:12
-        if m < 10
-            monthNEE=imread([NEEDataPath,num2str(y),'0',num2str(m),'_global_grass_NEE_MTEmean.tif']);
-            monthNEE(monthNEE==monthNEE(1,1)) = nan;
-            monthData(:,:,m)=monthNEE;
-        else
-            monthNEE=imread([NEEDataPath,num2str(y),num2str(m),'_global_grass_NEE_MTEmean.tif']);
-            monthNEE(monthNEE==monthNEE(1,1)) = nan;
-            monthData(:,:,m)=monthNEE;
-        end
-    end
-    rasall(:,:,y-1982+1)=nansum(monthData,3);
+rasall = nan(nrw,ncl,yrs(2)-yrs(1)+1);
+for yr = yrs(1):yrs(2)
+    tmp = double(imread([NEEtotal_pt,'/',hds,num2str(yr),fts]));
+    tmp(tmp<efrg(1)|tmp>efrg(2)) = nan;
+    rasall(:,:,yr-yrs(1)+1) = tmp*sf;
 end
 
 stdnee = std(rasall,0,3);
@@ -61,8 +52,9 @@ hotspt(idx95) = 95;
 stdnee(isnan(stdnee)) = -99;
 hotspt(isnan(hotspt)) = -99;
 
-geotiffwrite([outpt,'/',outhd,'_82to12_STD.tif'],single(stdnee),Rmat)
-geotiffwrite([outpt,'/',outhd,'_82to12_Hotspots.tif'],int8(hotspt),Rmat)
+geotiffwrite([outpt,'/',outhd,'_82to11_STD.tif'],single(stdnee),Rmat)
+geotiffwrite([outpt,'/',outhd,'_82to11_Hotspots.tif'],int8(hotspt),Rmat)
 
 mins = toc;
 disp(['Time:',num2str(mins/60),'minutes'])
+
