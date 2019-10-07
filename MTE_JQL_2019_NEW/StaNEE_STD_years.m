@@ -20,7 +20,7 @@ valid = [-5000,20000];
 sf = 1;
 outbv = -9999;
 
-stats = 1;  % 1.mean 2.sum 3.max 4.std
+stats = 4;  % 1.mean 2.sum 3.max 4.std
 
 %%  calculate
 

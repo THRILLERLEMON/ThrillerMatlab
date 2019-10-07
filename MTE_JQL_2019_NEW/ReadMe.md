@@ -419,3 +419,5 @@ nohup /opt/matlab/MATLAB/R2014b/bin/matlab -nodisplay -nodesktop < StaNEE_all30_
 StaNEE_Met_cor
 nohup /opt/matlab/MATLAB/R2014b/bin/matlab -nodisplay -nodesktop < StaNEE_Met_cor.m 1>RunCPT.log 2>RunCPT.err &
 
+StaNEEflux_Zscore
+nohup /opt/matlab/MATLAB/R2014b/bin/matlab -nodisplay -nodesktop < StaNEEflux_Zscore.m 1>RunZC.log 2>RunZC.err &
