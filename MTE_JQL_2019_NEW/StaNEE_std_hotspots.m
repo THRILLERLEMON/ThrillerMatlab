@@ -7,14 +7,15 @@
 %%  input
 clear;clc;tic
 
-NEEtotal_pt = '/home/JiQiulei/MTE_JQL_2019/NEE_Upscale_Sum2Year';
+
+NEEtotal_pt = '/home/JiQiulei/MTE_JQL_2019/NEE_Upscale_Sum2Year/Total';
 efrg = [-5000,10000];
 sf = 1;
-hds = '';
-fts = 'NEEsum2Year_flux.tif';
+hds = 'NEEgra_FluxSum_';
+fts = '_01to12_total.tif';
 yrs = [1982,2011];
 
-outhd = 'NEESum2Year';
+outhd = 'NEE_YearTotal';
 outpt = '/home/JiQiulei/MTE_JQL_2019/NEE_Sta';
 
 %%  operate

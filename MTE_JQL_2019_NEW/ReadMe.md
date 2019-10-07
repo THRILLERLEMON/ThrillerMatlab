@@ -377,5 +377,45 @@ nohup /opt/matlab/MATLAB/R2014b/bin/matlab -nodisplay -nodesktop < StaNEE_Month2
 StaNEE_Out_Month2YearsMean
 nohup /opt/matlab/MATLAB/R2014b/bin/matlab -nodisplay -nodesktop < StaNEE_Out_Month2YearsMean.m 1>RunOYSM.log 2>RunOYSM.err &
 
+StaNEE_M2Y_Flux
+nohup /opt/matlab/MATLAB/R2014b/bin/matlab -nodisplay -nodesktop < StaNEE_M2Y_Flux.m 1>RunM2YF.log 2>RunM2YF.err &
+
+StaNEE_YearTotal
+nohup /opt/matlab/MATLAB/R2014b/bin/matlab -nodisplay -nodesktop < StaNEE_YearTotal.m 1>RunM2YT.log 2>RunM2YT.err &
+
 StaNEE_Month2Season
 nohup /opt/matlab/MATLAB/R2014b/bin/matlab -nodisplay -nodesktop < StaNEE_Month2Season.m 1>RunM2S.log 2>RunM2S.err &
+
+MTE_NEE_Uncertainty
+nohup /opt/matlab/MATLAB/R2014b/bin/matlab -nodisplay -nodesktop < MTE_NEE_Uncertainty.m 1>RunMNU.log 2>RunMNU.err &
+
+StaNEE_mean_years
+nohup /opt/matlab/MATLAB/R2014b/bin/matlab -nodisplay -nodesktop < StaNEE_mean_years.m 1>RunMY.log 2>RunMY.err &
+
+StaNEE_YttZones
+nohup /opt/matlab/MATLAB/R2014b/bin/matlab -nodisplay -nodesktop < StaNEE_YttZones.m 1>RunYTZ.log 2>RunYTZ.err &
+
+StaNEE_Seasn_mean
+nohup /opt/matlab/MATLAB/R2014b/bin/matlab -nodisplay -nodesktop < StaNEE_Seasn_mean.m 1>RunSM.log 2>RunSM.err &
+
+StaNEE_psngNumSum
+nohup /opt/matlab/MATLAB/R2014b/bin/matlab -nodisplay -nodesktop < StaNEE_psngNumSum.m 1>RunPNN.log 2>RunPNN.err &
+
+StaNEE_std_hotspots
+nohup /opt/matlab/MATLAB/R2014b/bin/matlab -nodisplay -nodesktop < StaNEE_std_hotspots.m 1>RunHS.log 2>RunHS.err &
+
+StaNEE_drMet2v_NegPcor
+nohup /opt/matlab/MATLAB/R2014b/bin/matlab -nodisplay -nodesktop < StaNEE_drMet2v_NegPcor.m 1>Run2NP.log 2>Run2NP.err &
+
+dif_MTE_Jung
+nohup /opt/matlab/MATLAB/R2014b/bin/matlab -nodisplay -nodesktop < dif_MTE_Jung.m 1>RunDMJ.log 2>RunDMJ.err &
+
+StaNEE_slp_P
+nohup /opt/matlab/MATLAB/R2014b/bin/matlab -nodisplay -nodesktop < StaNEE_slp_P.m 1>RunSLP.log 2>RunSLP.err &
+
+StaNEE_all30_SsSk_stat
+nohup /opt/matlab/MATLAB/R2014b/bin/matlab -nodisplay -nodesktop < StaNEE_all30_SsSk_stat.m 1>Run30SSS.log 2>Run30SSS.err &
+
+StaNEE_Met_cor
+nohup /opt/matlab/MATLAB/R2014b/bin/matlab -nodisplay -nodesktop < StaNEE_Met_cor.m 1>RunCPT.log 2>RunCPT.err &
+

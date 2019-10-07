@@ -5,18 +5,18 @@ clear;close all;clc;tic
 
 %%  input
 
-NEEflx_fl = '/home/test2/MTE_NEE/NEE_new02/yflux';
+NEEflx_fl = '/home/JiQiulei/MTE_JQL_2019/NEE_Upscale_Sum2Year/Flux';
 hdf = 'NEEgra_FluxSum_';
 ftf = '_01to12.tif';
 
-NEEtt_fl = '/home/test2/MTE_NEE/NEE_new02/ytotal';
+NEEtt_fl = '/home/JiQiulei/MTE_JQL_2019/NEE_Upscale_Sum2Year/Total';
 hdt = 'NEEgra_FluxSum_';
 ftt = '_01to12_total.tif';
 
 yrs = [1982,2011];
 outhds = 'NEEgra';
 bv = -9999;
-outpt = '/home/test2/MTE_NEE/NEE_new02/PsNg_year';
+outpt = '/home/JiQiulei/MTE_JQL_2019/NEE_Sta';
 
 %%  operate
 

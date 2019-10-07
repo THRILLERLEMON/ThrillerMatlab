@@ -5,13 +5,13 @@ clear;close all;clc
 
 %%  input
 
-MTE_fl = '/home/test2/MTE_NEE/NEE_new02/ymean/NEEfluxsum_82to11_mean.tif';
+MTE_fl = '/home/JiQiulei/MTE_JQL_2019/NEE_Sta/NEEflux_1982-2011_mean.tif';
 
 Jung_pt = '/home/test2/MTE_NEE/JungNEE/Flux/ymean';
 Jhd = 'Jung_NEE_FLUX_';
 Jft = '_82to11_mean.tif';
 
-outpt = '/home/test2/MTE_NEE/NEE_new02/AnnualMeanDiff';
+outpt = '/home/JiQiulei/MTE_JQL_2019/NEE_Sta';
 
 %%  operate
 

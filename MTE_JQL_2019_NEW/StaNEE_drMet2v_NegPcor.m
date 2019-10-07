@@ -6,11 +6,11 @@ tic;clear;close all;clc
 %%  Input
 
 drMetpt = '/home/test2/MTE_NEE/MeteoData/DETREND';
-outpt = '/home/test2/MTE_NEE/NEE_new02/Pcor/met_P_T';  % Outpath
+outpt = '/home/JiQiulei/MTE_JQL_2019/NEE_Sta';  % Outpath
 
 %%  pm
 
-NEE_pt = '/home/test2/MTE_NEE/NEE_new02/yflux';  % NEE flux yearly data path
+NEE_pt = '/home/JiQiulei/MTE_JQL_2019/NEE_Upscale_Sum2Year/Flux';  % NEE flux yearly data path
 NEE_vd = [-5000,30000];
 
 TEM_pt = [drMetpt,'/Temperature'];  % TEM yearly data path
