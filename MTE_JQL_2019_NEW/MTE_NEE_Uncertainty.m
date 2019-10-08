@@ -6,7 +6,7 @@ clear;clc
 
 %%  input
 
-NEEDataPath='/home/JiQiulei/MTE_JQL_2019/NEE_Upscale_Sum2Year/Flux';
+NEEDataPath='/home/JiQiulei/MTE_JQL_2019/NEE_Upscale';
 
 outputPath='/home/JiQiulei/MTE_JQL_2019/NEE_Sta/';
 
@@ -21,40 +21,46 @@ Rmat = makerefmat('RasterSize',[nrows,ncols],...
 %%  operate
 treeData=NaN(1752,4320,16);
 
-idx = zeros(nrows,ncols);
+idy = zeros(nrows,ncols);
+idt = zeros(nrows,ncols);
 
 for t = 1:16
     yearData = NaN(1752,4320,30);
     for y = 1982:2011
-        
-        yearNEE=imread([NEEDataPath,'/','NEEgra_FluxSum_',num2str(y),'_01to12.tif']);
-        yearNEE(yearNEE==yearNEE(1,1)) = nan;
+        monthData=NaN(1752,4320,12);
+        for m=1:12
+            monthNEE=imread([NEEDataPath,'/',num2str(y),num2str(m,'%02d'),'_global_grass_NEE_MT',num2str(t),'.tif']);
+            monthNEE(monthNEE==monthNEE(1,1)) = nan;
+            monthData(:,:,m)=monthNEE;
+            idy = sum(cat(3,idy,~isnan(monthNEE)),3);
+        end
+        yearNEE=nansum(monthData,3);
+        yearNEE(idy==0)=nan;
         yearData(:,:,y-1982+1)=yearNEE;
+        idt = sum(cat(3,idt,~isnan(yearNEE)),3);
     end
     treeData(:,:,t)=nanmean(yearData,3);
-    idx = sum(cat(3,idx,~isnan(yearData)),3);
 end
 
 meanAllMT=nanmean(treeData,3);
 stdAllMT=nanstd(treeData,0,3);
 cvAllMT=stdAllMT./meanAllMT;
 
-meanAllMT(idx==0) = -9999;
-stdAllMT(idx==0) = -9999;
-cvAllMT(idx==0) = -9999;
+meanAllMT(idt==0) = -9999;
+stdAllMT(idt==0) = -9999;
+cvAllMT(idt==0) = -9999;
 
 geotiffwrite([outputPath,'YearlyMeanAllMT.tif'],meanAllMT,Rmat)
 geotiffwrite([outputPath,'YearlyStdAllMT.tif'],stdAllMT,Rmat)
 geotiffwrite([outputPath,'YearlyCVAllMT.tif'],cvAllMT,Rmat)
 
-newstdAllMT=stdAllMT*1e15;
-newcvAllMT=cvAllMT*1e15;
-newstdAllMT(idx==0) = -9999; 
-newcvAllMT(idx==0) = -9999; 
+meanAllMT(idt==0) = nan;
+stdAllMT(idt==0) = nan;
+cvAllMT(idt==0) = nan;
 
-geotiffwrite([outputPath,'YearlyStdAllMTe15.tif'],newstdAllMT,Rmat)
-geotiffwrite([outputPath,'YearlyCVAllMTe15.tif'],newcvAllMT,Rmat)
+geotiffwrite([outputPath,'YearlyMeanAllMT_NBV.tif'],meanAllMT,Rmat)
+geotiffwrite([outputPath,'YearlyStdAllMT_NBV.tif'],stdAllMT,Rmat)
+geotiffwrite([outputPath,'YearlyCVAllMT_NBV.tif'],cvAllMT,Rmat)
 
-% save([outputPath,'Uncertainty'])
 
 disp('Finish!')

@@ -54,14 +54,14 @@ for i = 1:length(RHead)
     add20perSplitX = StandardSplitX;
     min20perSplitX = StandardSplitX;
     add20perSplitX(:, StestVarIndex) = add20perSplitX(:, StestVarIndex)*1.2;
-    min20perSplitX(:, StestVarIndex) = min20perSplitX(:, StestVarIndex)*0.2;
+    min20perSplitX(:, StestVarIndex) = min20perSplitX(:, StestVarIndex)*0.8;
     
     %change Regress value
     RtestVarIndex=RHead==string(RHead(i));
     add20perRegressX = StandardRegressX;
     min20perRegressX = StandardRegressX;
     add20perRegressX(:, RtestVarIndex) = add20perRegressX(:, RtestVarIndex)*1.2;
-    min20perRegressX(:, RtestVarIndex) = min20perRegressX(:, RtestVarIndex)*0.2;
+    min20perRegressX(:, RtestVarIndex) = min20perRegressX(:, RtestVarIndex)*0.8;
 
     %get Standard predict value
     mteY = mtepredict(bestMTE, StandardSplitX, StandardRegressX, binCat);

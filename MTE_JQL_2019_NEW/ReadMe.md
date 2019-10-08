@@ -392,8 +392,11 @@ nohup /opt/matlab/MATLAB/R2014b/bin/matlab -nodisplay -nodesktop < MTE_NEE_Uncer
 StaNEE_mean_years
 nohup /opt/matlab/MATLAB/R2014b/bin/matlab -nodisplay -nodesktop < StaNEE_mean_years.m 1>RunMY.log 2>RunMY.err &
 
-StaNEE_YttZones
-nohup /opt/matlab/MATLAB/R2014b/bin/matlab -nodisplay -nodesktop < StaNEE_YttZones.m 1>RunYTZ.log 2>RunYTZ.err &
+StaNEE_YttZonesSum
+nohup /opt/matlab/MATLAB/R2014b/bin/matlab -nodisplay -nodesktop < StaNEE_YttZonesSum.m 1>RunYTZS.log 2>RunYTZS.err &
+
+StaNEE_YttZonesMean
+nohup /opt/matlab/MATLAB/R2014b/bin/matlab -nodisplay -nodesktop < StaNEE_YttZonesMean.m 1>RunYTZM.log 2>RunYTZM.err &
 
 StaNEE_Seasn_mean
 nohup /opt/matlab/MATLAB/R2014b/bin/matlab -nodisplay -nodesktop < StaNEE_Seasn_mean.m 1>RunSM.log 2>RunSM.err &
@@ -421,3 +424,9 @@ nohup /opt/matlab/MATLAB/R2014b/bin/matlab -nodisplay -nodesktop < StaNEE_Met_co
 
 StaNEEflux_Zscore
 nohup /opt/matlab/MATLAB/R2014b/bin/matlab -nodisplay -nodesktop < StaNEEflux_Zscore.m 1>RunZC.log 2>RunZC.err &
+
+StaNEE_YttZones_VAR_mean
+nohup /opt/matlab/MATLAB/R2014b/bin/matlab -nodisplay -nodesktop < StaNEE_YttZones_VAR_mean.m 1>RunYZVM.log 2>RunYZVM.err &
+
+StaNEE_dif_IFOrNot
+nohup /opt/matlab/MATLAB/R2014b/bin/matlab -nodisplay -nodesktop < StaNEE_dif_IFOrNot.m 1>RunIFON.log 2>RunIFON.err &

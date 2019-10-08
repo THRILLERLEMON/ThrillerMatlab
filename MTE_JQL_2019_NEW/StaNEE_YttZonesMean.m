@@ -1,4 +1,4 @@
-% Sum(PgC/yr) of global and regional NEE total.
+% Mean(gC/m2/yr) of global and regional NEE total.
 % geotiff
 % 2017.3.26
 clear;close all;clc;tic
@@ -13,8 +13,21 @@ clmgs_fl = '/home/test2/MTE_NEE/OtherData/Gras_Clim.tif';  % climate of grasslan
 
 outpt = '/home/JiQiulei/MTE_JQL_2019/NEE_Sta';
 
-%%  Operate
+grapc_fl = '/home/test2/MTE_NEE/OtherData/glc2000_10km_grass_bili.tif';
+grapc = double(imread(grapc_fl));
+grapc(grapc==grapc(1,1)) = nan;
 
+S1 = referenceSphere('earth','km');
+wdzone = ones(1752,4320);
+Rmat = makerefmat('RasterSize',[1752 4320],...
+    'Latlim',[-56 90],'Lonlim',[-180 180],...
+    'ColumnsStartFrom','north');
+[~,colarea] = areamat(wdzone,Rmat,S1);
+wdarea = repmat(colarea,1,4320);
+
+GraArea = wdarea.*grapc;
+GraArea = GraArea(:);
+%%  Operate
 yt_hd = 'NEEgra_FluxSum_';
 yt_ft = '_01to12_total.tif';
 
@@ -35,7 +48,7 @@ end
 clmidx{length(uqclm)+1} = find(~isnan(clmgs));
 clearvars clmgs clmgs2
 
-[yr1,yr2] = deal(2000,2011);
+[yr1,yr2] = deal(1982,2011);
 yrst = nan(yr2-yr1+1,length(clmidx));
 snyrst = nan(yr2-yr1+1,length(clmidx),4);
 disp('start')
@@ -53,10 +66,10 @@ for yr = yr1:yr2
     end
     
     for clm = 1:length(clmidx)
-        yrst(yr-yr1+1,clm) = nanmean(ytt(clmidx{clm}));
+        yrst(yr-yr1+1,clm) = nansum(ytt(clmidx{clm}))*1e9/nansum(GraArea(clmidx{clm}));
         for isn = 1:3+(yr~=yr2)
             sny1 = sny(:,:,isn);
-            snyrst(yr-yr1+1,clm,isn) = nanmean(sny1(clmidx{clm}));
+            snyrst(yr-yr1+1,clm,isn) = nanmean(sny1(clmidx{clm}))/nansum(GraArea(clmidx{clm}));
         end
     end
     disp(num2str(yr))
@@ -65,10 +78,10 @@ end
 disp('write')
 dlmwrite([outpt,'/',num2str(yr1),'-',num2str(yr2),'NEEtotal_zone_MEAN.txt'],...
     [[-99,uqclm',9999];[(yr1:yr2)',yrst]],'delimiter',' ')
-for isn = 1:4
-    dlmwrite([outpt,'/',num2str(yr1),'-',num2str(yr2),'NEEtotal_',snstr{isn},'_zone_MEAN.txt'],...
-        [[-99,uqclm',9999];[(yr1:yr2)',snyrst(:,:,isn)]],'delimiter',' ')
-end
+% for isn = 1:4
+%     dlmwrite([outpt,'/',num2str(yr1),'-',num2str(yr2),'NEEtotal_',snstr{isn},'_zone_MEAN.txt'],...
+%         [[-99,uqclm',9999];[(yr1:yr2)',snyrst(:,:,isn)]],'delimiter',' ')
+% end
 
 mins = toc;
 disp(['Time:',num2str(mins/60),'minutes'])

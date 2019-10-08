@@ -6,15 +6,15 @@ clear;clc;close all
 %%  user
 
 %%  input   –ﬁ∏ƒ’‚¿Ô
-yearSE=[1997,2001];
+yearSE=[1982,2011];
 
-ras_path = '/home/JiQiulei/MTE_JQL_2019/NEE_Upscale_Sum2Year/Flux';
-fhead='NEEgra_FluxSum_';
+ras_path = '/home/JiQiulei/MTE_JQL_2019/NEE_Upscale_NoIF_Sum2Year/Flux';
+fhead='NoIF_FluxSum_';
 ffoot='_01to12.tif';
 
 
-prefix = 'NEEFlux_';
-outpath = '/home/JiQiulei/MTE_JQL_2019/NEE_Sta';
+prefix = 'NoIF_NEEFlux_';
+outpath = '/home/JiQiulei/MTE_JQL_2019/NEE_Upscale_NoIF_Sum2Year';
 
 valid = [-5000,20000];
 sf = 1;
