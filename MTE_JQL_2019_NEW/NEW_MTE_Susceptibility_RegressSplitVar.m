@@ -97,7 +97,7 @@ end
 
 cha=data_R2Standard-data_R2RandomTest;
 chaPer=cha./data_R2Standard;
-outputInfo=[string('Var'),SHead;string('R2Standard'),data_R2Standard;string('R2RandomTest'),data_R2RandomTest;string('ChangePer'),chaPer];
+outputInfo=[string('Var'),RHead;string('R2Standard'),data_R2Standard;string('R2RandomTest'),data_R2RandomTest;string('ChangePer'),chaPer];
 xlswrite([outPutPath,'All_MTE_Susceptibility_RegressSplitVar.xls'], cellstr(outputInfo));
 
 save([outPutPath, 'MTE_Susceptibility_RegressSplitVar_EnvVar']);
