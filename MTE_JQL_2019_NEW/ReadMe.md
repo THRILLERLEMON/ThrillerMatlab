@@ -430,3 +430,9 @@ nohup /opt/matlab/MATLAB/R2014b/bin/matlab -nodisplay -nodesktop < StaNEE_YttZon
 
 StaNEE_dif_IFOrNot
 nohup /opt/matlab/MATLAB/R2014b/bin/matlab -nodisplay -nodesktop < StaNEE_dif_IFOrNot.m 1>RunIFON.log 2>RunIFON.err &
+
+StaNEE_Forst_M2Y_Ymean
+nohup /opt/matlab/MATLAB/R2014b/bin/matlab -nodisplay -nodesktop < StaNEE_Forst_M2Y_Ymean.m 1>RunFM2YM.log 2>RunFM2YM.err &
+
+StaNEE_sum_FoldRas
+nohup /opt/matlab/MATLAB/R2014b/bin/matlab -nodisplay -nodesktop < StaNEE_sum_FoldRas.m 1>RunSFR.log 2>RunSFR.err &
