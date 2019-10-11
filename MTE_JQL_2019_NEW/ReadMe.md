@@ -436,3 +436,6 @@ nohup /opt/matlab/MATLAB/R2014b/bin/matlab -nodisplay -nodesktop < StaNEE_Forst_
 
 StaNEE_sum_FoldRas
 nohup /opt/matlab/MATLAB/R2014b/bin/matlab -nodisplay -nodesktop < StaNEE_sum_FoldRas.m 1>RunSFR.log 2>RunSFR.err &
+
+StaNEEtt_std_hotspots_Sta
+nohup /opt/matlab/MATLAB/R2014b/bin/matlab -nodisplay -nodesktop < StaNEEtt_std_hotspots_Sta.m 1>RunHSS.log 2>RunHSS.err &
