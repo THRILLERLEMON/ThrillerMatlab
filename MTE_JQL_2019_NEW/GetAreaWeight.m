@@ -1,3 +1,4 @@
+%cellwt=GetAreaWeight(1/120)
 function cellwt = GetAreaWeight(deg)
 rows=180/deg;
 cols=360/deg;

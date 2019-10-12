@@ -37,10 +37,10 @@ mtbuild|构建模型树|训练数据|模型树（mat）|MT*N*(N为第几次交�
 MTpredict|使用单个树计算预测值|模型树和解释变量数据|一颗模型树的预测值|matlab变量|无
 **Parfor_Make5RandomCrossValind**|进行5份随机验证的准备|训练数据|5份随机验证使用的索引|mat文件|因为分份索引后续还要使用，并且要实现5个验证并行运行，所以先生成索引
 **Parfor_Run5MT_*N***|运行5份随机验证的第*N*份|训练数据和分份索引|模型树|MT*N*(N为第几次交叉验证)|无
-**TestEveryRandomMT**|验证模型树（随机验证生成）|模型树和测试训练数据|每一颗模型树的预测值和真值|xls文件RandomMTtestInfo_*N*|备注
+**TestEveryRandomMT**|验证模型树（随机验证生成）|模型树和测试训练数据|每一颗模型树的预测值和真值|xls文件RandomMTtestInfo_*N*|无
 **MakeForest*N***|生成森林|根据模型树生成森林|森林|Forest*N*.mat|可能需要分部执行，之后使用Combine10Forest.m进行合并
 mtEnsemble|生成森林和树组合|模型树和其他训练数据|森林（mat）和组合（mat）|Forest1.mat和MTE1.mat|无
-**Combine10Forest**|合并多个森林|多个森林|一个合成之后的森林|Forest*.mat|备注
+**Combine10Forest**|合并多个森林|多个森林|一个合成之后的森林|Forest*.mat|无
 **GetMTEPredictInfo**|在森林中寻找最优组合|森林和其他数据|返回MTE预测值和真值的对比矩阵|matlab变量|无
 TF|在森林中提取一定个数的MTE|森林和想要的MTE中树的数量|返回MTE|matlab变量|无
 mtepredict|根据模型树组合输出预测值|模型树组合和解释变量|返回预测值|matlab变量|无
@@ -57,38 +57,38 @@ test|输出MTE预测值和真值的R2|训练数据和MTE|返回MTE得出的均�
 
 脚本名称|作用|输入|输出|备注
 :-:|:-:|:-:|:-:|:-:
-**GetAreaWeight**|作用|输入|输出|备注
-**StaNEE_dif_MTE_Jung**|作用|输入|输出|备注
-**StaNEE_GetGrassGridInfo**|作用|输入|输出|备注
-**StaNEE_all30_SsSk_stat**|作用|输入|输出|备注
-**StaNEE_Classfiy8000ChangeKind**|作用|输入|输出|备注
-**StaNEE_CountPixelandPer**|作用|输入|输出|备注
-**StaNEE_dif_2Raster**|作用|输入|输出|备注
-**StaNEE_dif_IFOrNot**|作用|输入|输出|备注
-**StaNEE_drMet2v_NegPcor**|作用|输入|输出|备注
-**StaNEE_Forst_M2Y_Ymean**|作用|输入|输出|备注
-**StaNEE_Frost_SR_space**|作用|输入|输出|备注
-**StaNEE_getVarSiteYear**|作用|输入|输出|备注
-**StaNEE_IdePsNg**|作用|输入|输出|备注
-**StaNEE_M2Y_Flux**|作用|输入|输出|备注
-**StaNEE_mean_years**|作用|输入|输出|备注
-**StaNEE_Met_cor**|作用|输入|输出|备注
-**StaNEE_Month2Season**|作用|输入|输出|备注
-**StaNEE_Pcor_withPRE_TEM_Pic**|作用|输入|输出|备注
-**StaNEE_psng30YAreaExt**|作用|输入|输出|备注
-**StaNEE_psngNumSum**|作用|输入|输出|备注
-**StaNEE_RelNEEPrebyStep**|作用|输入|输出|备注
-**StaNEE_Seasn_mean**|作用|输入|输出|备注
-**StaNEE_slp_P**|作用|输入|输出|备注
-**StaNEE_std_hotspots**|作用|输入|输出|备注
-**StaNEE_STD_years**|作用|输入|输出|备注
-**StaNEE_sum_FoldRas**|作用|输入|输出|备注
-**StaNEE_YearTotal**|作用|输入|输出|备注
-**StaNEE_YttZones_VAR_mean**|作用|输入|输出|备注
-**StaNEE_YttZonesMean**|作用|输入|输出|备注
-**StaNEE_YttZonesSum**|作用|输入|输出|备注
-**StaNEEflux_Zscore**|作用|输入|输出|备注
-**StaNEEtt_std_hotspots_Sta**|作用|输入|输出|备注
+**GetAreaWeight**|生成全球的面积矩阵|栅格大小|面积矩阵（km^2）|没有使用，被直接使用areamat代替
+**StaNEE_M2Y_Flux**|将月尺度的数据合成为年数据（加和）|月数据栅格|年数据栅格|无
+**StaNEE_YearTotal**|使用年尺度的通量数据计算年尺度的草地NEE总量数据|年的通量数据，草地比例|年尺度的草地NEE栅格|Total=Flux✖栅格草地比例✖栅格面积
+**StaNEE_Month2Season**|将月尺度数据合称为季度数据（加和）|月栅格数据|季度数据|345，678，91011，1212
+**StaNEE_mean_years**|计算多年平均数据|多年数据栅格|多年平均数据|无
+**StaNEE_Seasn_mean**|计算每个季度的多年平均值|多年多季度栅格数据|每个季度的多年平均栅格数据|无
+**StaNEE_slp_P**|计算多年数据的趋势——slop|多年数据栅格|多年内的变化趋势slop|即y=kx+b的k
+**StaNEE_STD_years**|计算多年数据的标准差|多年数据栅格|多年内数据的标准差|无
+**StaNEE_std_hotspots**|输出NEE总量变化的热点区域（标准差较大的区域）|NEE年总量栅格数据|标准差百分位数区域|1（1-75）、75（75-90）、90（90-95）、95（95-100）
+**StaNEE_std_hotspots_Sta**|对热点区域进行统计|热点区域数据、|多年平均NEE总量数据|统计为+，-的量，和净量
+**StaNEE_Met_cor**|计算多变量和NEE的相关性|多年的NEE数据和多年的变量数据|相关系数（R）和显著相关（Rsig）|无
+**StaNEE_drMet2v_NegPcor**|计算多变量和NEE的偏相关性|多年的NEE数据和多年的变量数据|相关系数（R）和显著相关（Rsig）|另外输出的min数据是表征到底哪个变量更加促进或者抑制NEE
+**StaNEE_Pcor_withPRE_TEM_Pic**|NEE和多变量片相关出图|多变量和NEE的相关数据|哪个变量的相关系数更大|弃用
+**StaNEE_psngNumSum**|统计出全时间段每个栅格上值为正负的次数|多年的NEE数据|为正为负的次数和加和数据|无
+**StaNEE_psng30YAreaExt**|导出全时间段内一直为正一直为负的区域|全部年数据为正为负的次数|全为正和全为负的区域|无
+**StaNEE_all30_SsSk_stat**|统计全时间段内（30年）各类栅格的面积、占比和NEE总量|多年平均NEE、草地比例数据、各类栅格数据|统计数据，面积、占比和NEE总量|统计一直为正/负；热点区域栅格
+**StaNEE_IdePsNg**|识别栅格数据的正负|一个栅格数据|栅格正负的标记（1，-1，0）|无
+**StaNEE_RelNEEPrebyStep**|按步取值探究NEE和降水的关系|多年平均降水和多年平均NEE|xls文件|降水10mm为Step，统计NEE的均值
+**StaNEE_YttZones_VAR_mean**|统计某变量在全球和气候分区内的平均值|气候分区、多期的变量数据|统计结果|-99为时间（多期），9999指全球
+**StaNEE_YttZonesMean**|统计NEE在全球和气候分区内平均值|气候分区、多期的NEE数据|统计结果|-99为时间（多期），9999指全球
+**StaNEE_YttZonesSum**|统计NEE在全球和气候分区内总和值|气候分区、多期的NEE数据|统计结果|-99为时间（多期），9999指全球
+**StaNEE_sum_FoldRas**|加和一个文件夹内的所有栅格数据|文件夹|加和数据|无
+**StaNEE_Forst_M2Y_Ymean**|将Forst数据由月数据加和到年在求多年平均|Forst月数据|多年平均的Forst数据|无
+**StaNEE_Frost_SR_space**|输出全球所有草地栅格对应的Forst和SR两个变量的值|变量的栅格和草地范围|两个变量的数据对|无
+**StaNEE_Tem_Prp_space**|输出全球所有草地栅格对应的Temp和Prp两个变量的值|变量的栅格和草地范围|两个变量的数据对|无
+**StaNEE_getVarSiteYear**|将变量的站点月数据加和成站点年数据|训练数据|变量的站点年数据|无
+**StaNEE_flux_Zscore**|计算栅格的Zscore|多期栅格数据和基准数据的标准差和平均值|多期的Zscore|Zscore=（Raster-mean）std
+**StaNEE_Classfiy8000ChangeKind**|分类出80s到00sNEE的变化类型|00s和80s的NEE平均值和00s-80s的栅格数据|变化类型|详见脚本
+**StaNEE_CountPixelandPer**|统计栅格（唯一值）中的各个唯一值的个数和占所有栅格的比例|栅格|统计数据|无
+**StaNEE_dif_2Raster**|输出两个栅格的差|两个栅格数据|栅格1-栅格2|无
+**StaNEE_dif_MTE_Jung**|输出两个NEE产品（多年平均）的不同|两种数据|数据的差|栅格A-栅格B
+**StaNEE_dif_IFOrNot**|输出有无（=0）草地管理NEE预测结果的区别|有无IF的NEE预测结果的多年平均|草地管理强度对NEE的影响|无
 
 **运行日志**
 *第一次运行-2019年9月21日*
@@ -489,8 +489,8 @@ nohup /opt/matlab/MATLAB/R2014b/bin/matlab -nodisplay -nodesktop < StaNEE_all30_
 StaNEE_Met_cor
 nohup /opt/matlab/MATLAB/R2014b/bin/matlab -nodisplay -nodesktop < StaNEE_Met_cor.m 1>RunCPT.log 2>RunCPT.err &
 
-StaNEEflux_Zscore
-nohup /opt/matlab/MATLAB/R2014b/bin/matlab -nodisplay -nodesktop < StaNEEflux_Zscore.m 1>RunZC.log 2>RunZC.err &
+StaNEE_flux_Zscore
+nohup /opt/matlab/MATLAB/R2014b/bin/matlab -nodisplay -nodesktop < StaNEE_flux_Zscore.m 1>RunZC.log 2>RunZC.err &
 
 StaNEE_YttZones_VAR_mean
 nohup /opt/matlab/MATLAB/R2014b/bin/matlab -nodisplay -nodesktop < StaNEE_YttZones_VAR_mean.m 1>RunYZVM.log 2>RunYZVM.err &
@@ -504,5 +504,5 @@ nohup /opt/matlab/MATLAB/R2014b/bin/matlab -nodisplay -nodesktop < StaNEE_Forst_
 StaNEE_sum_FoldRas
 nohup /opt/matlab/MATLAB/R2014b/bin/matlab -nodisplay -nodesktop < StaNEE_sum_FoldRas.m 1>RunSFR.log 2>RunSFR.err &
 
-StaNEEtt_std_hotspots_Sta
-nohup /opt/matlab/MATLAB/R2014b/bin/matlab -nodisplay -nodesktop < StaNEEtt_std_hotspots_Sta.m 1>RunHSS.log 2>RunHSS.err &
+StaNEE_std_hotspots_Sta
+nohup /opt/matlab/MATLAB/R2014b/bin/matlab -nodisplay -nodesktop < StaNEE_std_hotspots_Sta.m 1>RunHSS.log 2>RunHSS.err &
